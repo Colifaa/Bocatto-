@@ -19,6 +19,7 @@ import {
   IconButton,
   Select,
 } from '@chakra-ui/react';
+import Cards from '../components/Cards';
 
 export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedido }) {
 
@@ -72,6 +73,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
       <DrawerOverlay />
       <DrawerContent color="blackAlpha.800" alignItems="center" >
         <DrawerCloseButton />
+        
         <DrawerHeader fontSize={['xl', '2xl', '3xl']}>Bondi-O-Loco</DrawerHeader>
 
         <DrawerBody bgColor="red.200" boxSize="container.md">
@@ -268,7 +270,9 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                 <Button type="submit" mt={4} colorScheme="teal">
                   Agregar Producto
                 </Button>
+                
               </HStack>
+            
             </form>
 
           </VStack>
@@ -292,7 +296,9 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
           />
         </DrawerFooter>
       </DrawerContent>
+      
     </Drawer>
+    
 
   );
 }

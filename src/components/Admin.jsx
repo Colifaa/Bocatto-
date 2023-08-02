@@ -16,6 +16,8 @@ function Admin() {
   const [salsas, setSalsas] = useState('');
   const [imagenProducto, setImagenProducto] = useState(null);
 
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes realizar la lógica para guardar los datos del producto, como enviar una solicitud a la ruta API de Next.js para almacenarlos en una base de datos o archivo.
