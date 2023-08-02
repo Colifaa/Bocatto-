@@ -76,7 +76,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
 
         <DrawerBody bgColor="red.200" boxSize="container.md">
 
-          <VStack spacing={4} align="center" mt="150" > {/* Agregamos mt y mb aquí */}
+          <VStack spacing={4} align="center" > {/* Agregamos mt y mb aquí */}
 
             <form onSubmit={enviarPedido}>
               <FormControl>
