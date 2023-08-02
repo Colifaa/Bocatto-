@@ -5,7 +5,7 @@ import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
 import FormularioInicioSesion from '../components/FormularioInicioSesion';
 import Admin from '../components/Admin.jsx';
 import FormularioRealizarPedido from "@/components/FormularioRealizarPedido";
-
+import Cards from "../components/Cards"
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = Chakra.useDisclosure();
@@ -59,6 +59,8 @@ export default function Home() {
         <Chakra.Text fontSize={['xl', '2xl', '3xl']}>
           Buenos Aires 60, M5600 FZB, Mendoza, Argentina
         </Chakra.Text>
+        
+        <Cards/>
 
         {/* Botón para abrir el formulario de inicio de sesión */}
         <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" onClick={onOpenInicioSesion}>
