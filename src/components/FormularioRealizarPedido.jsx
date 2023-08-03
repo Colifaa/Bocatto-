@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, FormHelperText, VStack, Select, HStack, Button, IconButton, Box
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, FormHelperText, VStack, Select, HStack, Button, IconButton, Box, Flex
 } from '@chakra-ui/react';
 import Cards from '../components/Cards';
 
@@ -61,7 +61,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
       <ModalHeader fontSize={['xl', '2xl', '3xl']}>  <Box >
           <VStack spacing={4} align="center">
           <form onSubmit={enviarPedido}>
-            
+          <Flex justifyItems="flex-start" alignItems="center" mb={4}>
             <FormControl justifyItems="flex-start">
               <FormLabel
                 textAlign="center"
@@ -78,7 +78,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                 Nombre
               </FormLabel>
   
-              <Input htmlSize={4} width='auto' 
+              <Input  
                 fontSize={['sm', 'md', 'lg']}
                 type="text"
                 value={nombre}
@@ -131,7 +131,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   transition="all 0.2s ease-in-out"
                 >Indicar número de teléfono.</FormHelperText>
               </FormControl>
-
+              </Flex>
            
 
               <FormControl mt="4">
@@ -177,7 +177,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
               </FormControl>
 
 
-
+              <Flex justifyItems="flex-start" alignItems="center" mb={4}>
               <FormControl mt={4}>
                 <FormLabel textAlign="center"
                   fontWeight="bold"
@@ -233,8 +233,9 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   borderBottom="2px solid teal.400"
                   transition="all 0.2s ease-in-out"
                 >Indicar cantidad de productos.</FormHelperText>
+               
               </FormControl>
-
+              </Flex>
               <HStack justifyContent="center">
             <Button type="submit" mt={4} colorScheme="teal">
               Agregar Producto
