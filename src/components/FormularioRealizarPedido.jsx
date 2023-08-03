@@ -69,56 +69,54 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
 
   return (
 
-    <Drawer isOpen={isOpen} placement={['top', 'center']} onClose={onClose} size={['full', '90%']}>
-      <DrawerOverlay />
-      <DrawerContent color="blackAlpha.800" alignItems="center" >
-        <DrawerCloseButton />
-        
-        <DrawerHeader fontSize={['xl', '2xl', '3xl']}>Bondi-O-Loco</DrawerHeader>
-
-        <DrawerBody bgColor="red.200" boxSize="container.md">
-
-          <VStack spacing={4} align="center" > {/* Agregamos mt y mb aquí */}
-
-            <form onSubmit={enviarPedido}>
-              <FormControl>
-                <FormLabel
-                  textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                  _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
-                  _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}
-                >
-                  Nombre
-                </FormLabel>
-
-
-                <Input
-                  fontSize='20px'
-                  type="text"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  size={['xs', 'md']}
-                  bg="teal.100"
-                  borderRadius="xl"
-                  _focus={{ outline: 'none', bg: 'white' }}
-                />
-
-                <FormHelperText textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                >Indicar nombre del producto.</FormHelperText>
-              </FormControl>
+    <Drawer isOpen={isOpen} placement={['top', 'center']} onClose={onClose} size="full">
+    <DrawerOverlay />
+    <DrawerContent color="blackAlpha.800" alignItems="center" bgSize="">
+      <DrawerCloseButton />
+      
+      <DrawerHeader fontSize={['xl', '2xl', '3xl']}>Bondi-O-Loco</DrawerHeader>
+  
+      <DrawerBody bgColor="red.200" boxSize="full">
+  
+        <VStack spacing={4} align="center" > {/* Agregamos mt y mb aquí */}
+          <form onSubmit={enviarPedido}>
+            <FormControl>
+              <FormLabel
+                textAlign="center"
+                fontWeight="bold"
+                fontSize={['md', 'lg', 'xl']}
+                color="black.500"
+                pb={2}
+                textShadow="1px 1px 2px teal.300"
+                borderBottom="2px solid teal.400"
+                transition="all 0.2s ease-in-out"
+                _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
+                _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}
+              >
+                Nombre
+              </FormLabel>
+  
+              <Input
+                fontSize={['sm', 'md', 'lg']}
+                type="text"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                size={['xs', 'md', 'lg']}
+                bg="teal.100"
+                borderRadius="xl"
+                _focus={{ outline: 'none', bg: 'white' }}
+              />
+  
+              <FormHelperText textAlign="center"
+                fontWeight="bold"
+                fontSize={['sm', 'md', 'lg']}
+                color="black.500"
+                pb={2}
+                textShadow="1px 1px 2px teal.300"
+                borderBottom="2px solid teal.400"
+                transition="all 0.2s ease-in-out"
+              >Indicar nombre del producto.</FormHelperText>
+            </FormControl>
 
               <FormControl mt={4}>
                 <FormLabel textAlign="center"
@@ -132,11 +130,11 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
                   _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}>Teléfono</FormLabel>
                 <Input
-                  fontSize='20px'
+                  fontSize='15px'
                   type="tel"
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
-                  size={['xs', 'md']}
+                  size={['xs', 'md','sm']}
                   bg="teal.100"
                   borderRadius="xl"
                   _focus={{ outline: 'none', bg: 'white' }}
@@ -166,8 +164,8 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                 <Select
                   value={metodoPago}
                   onChange={(e) => setMetodoPago(e.target.value)}
-                  fontSize='20px'
-                  size="md"
+                  fontSize='15px'
+                  size="sm"
                   color="red.500"
                   fontWeight="bold"
                   borderRadius="md"
@@ -179,13 +177,14 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                     bg: 'purple.500', // Color de fondo cuando se selecciona una opción
                   }}
                 >
-                  <option value="Efectivo" style={{ fontSize: '20px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }}>Efectivo</option>
-                  <option value="Mercado Pago" style={{ fontSize: '20px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }}>Mercado Pago</option>
+                  <option value="Efectivo" style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }}>Efectivo</option>
+                  <option value="Mercado Pago" style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }}>Mercado Pago</option>
                   {/* Agrega más opciones de métodos de pago si es necesario */}
                 </Select>
                 <FormHelperText textAlign="center"
                   fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
+                 
+                  fontSize={['md', 'lg', 'xl' ,'sm']}
                   color="black.500"
                   pb={2}
                   textShadow="1px 1px 2px teal.300"
@@ -206,8 +205,8 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
                   _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }} >Servicio:</FormLabel>
                 <Select
-   fontSize='20px'
-   size="md"
+   fontSize='15px'
+   size="sm"
    color="red.500"
    fontWeight="bold"
    borderRadius="md"
@@ -221,8 +220,8 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   value={TipoServicio}
                   onChange={(e) => setTipoServicio(e.target.value)}
                 >
-                  <option style={{ fontSize: '20px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="Retirar">Retirar</option>
-                  <option style={{ fontSize: '20px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="A domicilio">A domicilio</option>
+                  <option style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="Retirar">Retirar</option>
+                  <option style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="A domicilio">A domicilio</option>
                   {/* Agrega más opciones de tipos de servicio si es necesario */}
                 </Select>
                 <FormHelperText textAlign="center"
@@ -267,37 +266,33 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
               </FormControl>
 
               <HStack justifyContent="center">
-                <Button type="submit" mt={4} colorScheme="teal">
-                  Agregar Producto
-                </Button>
-                
-              </HStack>
-            
-            </form>
+            <Button type="submit" mt={4} colorScheme="teal">
+              Agregar Producto
+            </Button>
+          </HStack>
+        </form>
+      </VStack>
+    </DrawerBody>
 
-          </VStack>
-        </DrawerBody>
+    <DrawerFooter justifyContent="center" bg="gray.100">
+      <Button variant="outline" color="teal" mr={3} onClick={onClose} fontSize={['xl', '2xl', '3xl']}>
+        Cerrar Formulario
+      </Button>
 
-        <DrawerFooter justifyContent="center" bg="gray.100">
-          <Button variant="outline" color="teal" mr={3} onClick={onClose} fontSize={['xl', '2xl', '3xl']}>
-            Cerrar Formulario
-          </Button>
-
-          <IconButton
-            fontSize={['xl', '2xl', '3xl']}
-            as="button"
-            onClick={enviarPedido}
-            icon={<FaWhatsapp />}
-            size="lg"
-            colorScheme="green"
-            borderRadius="full"
-            transition="all 0.2s"
-            _hover={{ transform: "scale(1.2)" }}
-          />
-        </DrawerFooter>
-      </DrawerContent>
-      
-    </Drawer>
+      <IconButton
+        fontSize={['xl', '2xl', '3xl']}
+        as="button"
+        onClick={enviarPedido}
+        icon={<FaWhatsapp />}
+        size="lg"
+        colorScheme="green"
+        borderRadius="full"
+        transition="all 0.2s"
+        _hover={{ transform: "scale(1.2)" }}
+      />
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
     
 
   );
