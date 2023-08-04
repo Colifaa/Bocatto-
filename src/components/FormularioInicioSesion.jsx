@@ -1,19 +1,27 @@
 import * as Chakra from "@chakra-ui/react";
 import React, { useState } from 'react';
 
-const FormularioInicioSesion = ({ isOpen, onClose }) => {
+const FormularioInicioSesion = ({ isOpen, onClose, onLoginSuccess, onLogout }) => {
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
     // Aquí debes implementar la lógica para verificar las credenciales del administrador
     // Por ejemplo, puedes hacer una solicitud a tu servidor para validar las credenciales
     if (nombreUsuario === 'admin' && contrasena === 'admin123') {
       alert('Inicio de sesión exitoso');
+      setIsLoggedIn(true); // Establece el estado de inicio de sesión a verdadero
+      onLoginSuccess(); // Invoca la función para indicar que el inicio de sesión fue exitoso
       onClose(); // Cierra el formulario después del inicio de sesión exitoso
     } else {
       alert('Credenciales inválidas');
     }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Establece el estado de inicio de sesión a falso
+    onLogout(); // Invoca la función para indicar que el usuario ha cerrado sesión
   };
 
   return (
