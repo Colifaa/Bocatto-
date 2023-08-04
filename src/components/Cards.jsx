@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { HStack, Box, Card, CardBody, Image, Heading, Text, ButtonGroup, Divider, Stack, CardFooter, Button} from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import FormularioRealizarPedido from "../components/FormularioRealizarPedido"
+import Bruno from '../components/Bruno';
 
-function Cards() {
+function Cards({ productos }) {
   const images = ['Bondiola 1.png', 'Bondiola 2.png'];
   const [currentImage1, setCurrentImage1] = useState(0);
   const [currentImage2, setCurrentImage2] = useState(0);
@@ -13,6 +14,10 @@ function Cards() {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
  
+  const handlePedidoRealizado = (nuevosDatos) => {
+    setCart((prevCart) => [...prevCart, nuevosDatos]);
+  };
+
 
   const handleCloseForm = () => {
     setIsFormOpen(false);
@@ -36,6 +41,42 @@ function Cards() {
   return (
     <HStack   justifyContent="center">
     <Box>
+    {productos?.map((producto, index) => (
+        <Box key={index}>
+          <Card maxW={{ base: "200px", md: "300px" }} mx="auto">
+            <CardBody>
+              <Image
+                src={producto.imagen}
+                alt={`Imagen de ${producto.nombre}`}
+                borderRadius='lg'
+                border="4px"
+                boxSize={{ base: "150px", md: "250px" }}
+              />
+
+              <Stack>
+                <Heading size='md'>{producto.nombre}</Heading>
+                <Text>
+                  {producto.ingredientes}
+                </Text>
+                <Text color='blue.600' fontSize='2xl'>
+                  ${producto.precio}
+                </Text>
+              </Stack>
+            </CardBody>
+            <Divider />
+            <CardFooter>
+              <ButtonGroup spacing='2'>
+                {/* Agrega aquí los botones para realizar acciones con el producto */}
+              </ButtonGroup>
+            </CardFooter>
+            <HStack mt={4} justifyContent="center">
+              <ChevronLeftIcon boxSize={8} cursor="pointer" onClick={handlePrevImage1} />
+              <ChevronRightIcon boxSize={8} cursor="pointer" onClick={handleNextImage1} />
+            </HStack>
+          </Card>
+        </Box>
+      ))}
+      
       <Card maxW={{ base: "200px", md: "300px" }} mx="auto">
         <CardBody>
           <Image
@@ -114,7 +155,7 @@ function Cards() {
       <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} />
      
     </Box>
-    
+  
   </HStack>
   
 );

@@ -6,7 +6,15 @@ import {
   FormHelperText,
   Button,
   Box,
+  Modal,
+  ModalOverlay ,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton ,
+  ModalBody,
+  ModalFooter,
 } from '@chakra-ui/react';
+import Cards from '../components/Cards';
 
 function Admin() {
   const [showForm, setShowForm] = useState(false);
@@ -15,46 +23,67 @@ function Admin() {
   const [ingredientes, setIngredientes] = useState('');
   const [salsas, setSalsas] = useState('');
   const [imagenProducto, setImagenProducto] = useState(null);
-
   
+  const [productos, setProductos] = useState([]); // Lista de productos
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario ha iniciado sesión
+
+
+   
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes realizar la lógica para guardar los datos del producto, como enviar una solicitud a la ruta API de Next.js para almacenarlos en una base de datos o archivo.
-    // Por ejemplo:
-    const producto = {
+    
+    const nuevoProducto = {
       nombre: nombreProducto,
       precio: precioProducto,
       ingredientes: ingredientes,
       salsas: salsas,
-      imagen: imagenProducto,
+      imagen: URL.createObjectURL(imagenProducto),
     };
-    console.log(producto);
-    // Luego, puedes enviar los datos a la ruta API utilizando fetch u otra librería para hacer solicitudes HTTP.
-    handleClose(); // Cierra el formulario después de enviar los datos.
-  };
-
-  const toggleForm = () => {
-    setShowForm(!showForm);
+    
+    console.log("Nuevo producto:", nuevoProducto);
+    
+    setProductos([...productos, nuevoProducto]);
+    handleClose();
   };
 
   const handleClose = () => {
     setShowForm(false);
   };
 
+ 
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
+
+
+
+
   return (
-    <Box p={4}>
-      {showForm ? (
-        <form onSubmit={handleSubmit}>
-          <FormControl>
-            <FormLabel>Nombre del Producto</FormLabel>
-            <Input
-              type='text'
-              value={nombreProducto}
-              onChange={(e) => setNombreProducto(e.target.value)}
-            />
-            <FormHelperText>Indicar nombre del producto.</FormHelperText>
-          </FormControl>
+    <Box   p={4}>
+
+
+
+
+      <Modal isOpen={showForm} onClose={handleClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Agregar Producto</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
+              <FormControl>
+                <FormLabel>Nombre del Producto</FormLabel>
+                <Input
+                  type='text'
+                  value={nombreProducto}
+                  onChange={(e) => setNombreProducto(e.target.value)}
+                />
+                <FormHelperText>Indicar nombre del producto.</FormHelperText>
+              </FormControl>
 
           <FormControl mt={4}>
             <FormLabel>Precio del Producto</FormLabel>
@@ -99,20 +128,25 @@ function Admin() {
               Agregar una imagen representativa del producto.
             </FormHelperText>
           </FormControl>
-
-          <Button type='submit' mt={4} colorScheme='teal'>
-            Agregar Producto
-          </Button>
-
-          <Button onClick={handleClose} mt={4} ml={4}>
+          <Button type='submit' mt={4} colorScheme='teal' onClick={handleSubmit}>
+                Agregar Producto
+              </Button>
+            </form>
+          </ModalBody>
+          <ModalFooter>
+          <Button onClick={handleClose} colorScheme='teal' mr={3}>
             Cerrar Formulario
           </Button>
-        </form>
-      ) : (
-        <Button onClick={toggleForm} mt={4} colorScheme='blue'>
-          Abrir Formulario
-        </Button>
-      )}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      
+        <Cards productos={productos} />
+        <Box display="flex" justifyContent="center" mt={4}>
+      <Button onClick={toggleForm} colorScheme='blue'>
+        {showForm ? 'Cerrar Formulario' : 'Abrir Formulario'}
+      </Button>
+    </Box>
     </Box>
   );
 }

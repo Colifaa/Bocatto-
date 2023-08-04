@@ -44,7 +44,7 @@ export default function Home() {
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [estaAutenticado, setEstaAutenticado] = useState(false);
-  const { isOpen: isOpenInicioSesion, onOpen: onOpenInicioSesion, onClose: onCloseInicioSesion } = Chakra.useDisclosure();
+
 
   // Otros inputs de contacto y pedido
   const enviarPedido = () => {
@@ -66,10 +66,17 @@ export default function Home() {
     // Abrir el enlace de WhatsApp en una nueva ventana o pestaña
     window.open(enlaceWhatsApp, '_blank');
   };
+
+  const handleProductoAgregado = (nuevoProducto) => {
+    // Agrega el nuevo producto al estado cart o cualquier otro estado que estés utilizando en el componente Cards.
+    // Por ejemplo:
+    setCart((prevCart) => [...prevCart, nuevoProducto]);
+  };
+  
   return (
     <Chakra.Flex height="100vh" alignItems="center" justifyContent="center">
     <Chakra.VStack spacing={4} align="center">
-      <Admin/>
+
       <Chakra.Text fontSize={['4xl', '5xl', '6xl']}>Boccato</Chakra.Text>
       <Chakra.Text fontSize={['xl', '2xl', '3xl']}>•Sanguches de Bondiola• Los verdaderos 🔥🔥 📍 SAN RAFAEL - MENDOZA</Chakra.Text>
       <Chakra.Text fontSize={['xl', '2xl', '3xl']}>
@@ -82,13 +89,7 @@ export default function Home() {
         Buenos Aires 60, M5600 FZB, Mendoza, Argentina
       </Chakra.Text>
       
-      {/* Botón para abrir el formulario de inicio de sesión */}
-      <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" onClick={onOpenInicioSesion}>
-        Iniciar sesión
-      </Chakra.Button>
-      
-      {/* Componente del formulario de inicio de sesión */}
-      <FormularioInicioSesion isOpen={isOpenInicioSesion} onClose={onCloseInicioSesion} />
+
      {/* Botón para mostrar el componente "Cards" en el modal */}
      <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" onClick={handleOpenModal}>
         Realizar Pedido
@@ -107,7 +108,7 @@ export default function Home() {
             <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
             <Chakra.ModalCloseButton />
             <Chakra.ModalBody>
-              {isCardsOpen && <Cards />}
+              {isCardsOpen &&  <Cards onProductoAgregado={handleProductoAgregado} />}
             </Chakra.ModalBody>
             {/* Aquí puedes agregar cualquier otro contenido o botones que desees mostrar en el pie del modal */}
             <Chakra.Box mt={4} textAlign="center">
