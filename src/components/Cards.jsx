@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { HStack, Box, Card, CardBody, Image, Heading, Text, ButtonGroup, Divider, Stack, CardFooter, Button} from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { HStack, Box, Card, CardBody, Image, Heading, Text, ButtonGroup, Divider, Stack, CardFooter, Button,Grid,GridItem,SimpleGrid } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import FormularioRealizarPedido from "../components/FormularioRealizarPedido"
 import Bruno from '../components/Bruno';
+import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
 
-function Cards({ productos }) {
+function Cards({productos}) {
   const images = ['Bondiola 1.png', 'Bondiola 2.png'];
   const [currentImage1, setCurrentImage1] = useState(0);
   const [currentImage2, setCurrentImage2] = useState(0);
   const [cart, setCart] = useState([]); // Estado para almacenar los productos del carrito
+
+
   console.log("cart",cart);
 
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -38,11 +41,19 @@ function Cards({ productos }) {
   const handlePrevImage2 = () => {
     setCurrentImage2((prevImage) => (prevImage - 1 + images.length) % images.length);
   };
+
+
+
+  
   return (
-    <HStack   justifyContent="center">
-    <Box>
+    
+   
+      
+      
+    <Grid templateColumns="repeat(3, 1fr)" gap={4} justifyContent="center">
+    
     {productos?.map((producto, index) => (
-        <Box key={index}>
+        <Box key={index} display="flex" justifyContent="center" flexWrap="wrap" >
           <Card maxW={{ base: "200px", md: "300px" }} mx="auto">
             <CardBody>
               <Image
@@ -70,12 +81,17 @@ function Cards({ productos }) {
               </ButtonGroup>
             </CardFooter>
             <HStack mt={4} justifyContent="center">
-              <ChevronLeftIcon boxSize={8} cursor="pointer" onClick={handlePrevImage1} />
-              <ChevronRightIcon boxSize={8} cursor="pointer" onClick={handleNextImage1} />
+              <ChevronLeftIcon boxSize={8} cursor="pointer"  />
+              <ChevronRightIcon boxSize={8} cursor="pointer" />
             </HStack>
+            
           </Card>
+          
         </Box>
+        
       ))}
+      
+
       
       <Card maxW={{ base: "200px", md: "300px" }} mx="auto">
         <CardBody>
@@ -110,10 +126,10 @@ function Cards({ productos }) {
         </HStack>
         
       </Card>
-    </Box>
+  
     
 
-    <Box>
+    
       
       <Card maxW={{ base: "200px", md: "300px" }} mx="auto">
         <CardBody>
@@ -154,9 +170,13 @@ function Cards({ productos }) {
       
       <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} />
      
-    </Box>
+    
+    </Grid>
+
+
+
+
   
-  </HStack>
   
 );
 }

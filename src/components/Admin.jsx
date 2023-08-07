@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FormControl,
   FormLabel,
@@ -15,6 +15,7 @@ import {
   ModalFooter,
 } from '@chakra-ui/react';
 import Cards from '../components/Cards';
+import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
 
 function Admin() {
   const [showForm, setShowForm] = useState(false);
@@ -22,31 +23,55 @@ function Admin() {
   const [precioProducto, setPrecioProducto] = useState('');
   const [ingredientes, setIngredientes] = useState('');
   const [salsas, setSalsas] = useState('');
-  const [imagenProducto, setImagenProducto] = useState(null);
+  const [imagenProducto, setImagenProducto] = useState("");
+  
   
   const [productos, setProductos] = useState([]); // Lista de productos
 
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario ha iniciado sesión
 
-
-   
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const nuevoProducto = {
-      nombre: nombreProducto,
-      precio: precioProducto,
-      ingredientes: ingredientes,
-      salsas: salsas,
-      imagen: URL.createObjectURL(imagenProducto),
-    };
-    
-    console.log("Nuevo producto:", nuevoProducto);
-    
-    setProductos([...productos, nuevoProducto]);
-    handleClose();
+  
+    if (!imagenProducto) {
+      console.log("Debe seleccionar una imagen");
+      return;
+    }
+  
+    try {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const imagenBase64 = event.target.result;
+  
+        const nuevoProducto = {
+          nombre: nombreProducto,
+          precio: precioProducto,
+          salsas: salsas,
+          imagen: imagenBase64, // Almacena la imagen en formato base64
+        };
+  
+        const { data, error } = await supabase
+          .from('productos')
+          .insert([nuevoProducto]);
+  
+        if (error) {
+          console.error('Error al insertar producto en Supabase:', error);
+        } else {
+          console.log('Producto insertado en Supabase:', data);
+          setProductos([...productos, nuevoProducto]);
+          handleClose();
+        }
+      };
+      reader.readAsDataURL(imagenProducto); // Convierte el archivo a base64
+    } catch (error) {
+      console.error("Error al guardar el producto:", error);
+    }
+  
+    console.log("nuevoProducto",productos);
+    console.log("imagenProducto",imagenProducto);
   };
+
+
 
   const handleClose = () => {
     setShowForm(false);
@@ -60,6 +85,19 @@ function Admin() {
 
 
 
+  useEffect(() => {
+    // Aquí realizas la llamada a Supabase para obtener los productos
+    async function fetchProductos() {
+      const { data, error } = await supabase.from('productos').select('*');
+      if (error) {
+        console.error('Error al obtener productos:', error);
+      } else {
+        setProductos(data);
+      }
+    }
+
+    fetchProductos();
+  }, []);
 
 
   return (
