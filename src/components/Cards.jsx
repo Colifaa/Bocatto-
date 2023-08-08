@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { HStack, Box, Card, CardBody, Image, Heading, Text, ButtonGroup, Divider, Stack, CardFooter, Button,Grid,GridItem,SimpleGrid } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import FormularioRealizarPedido from "../components/FormularioRealizarPedido"
-import Bruno from '../components/Bruno';
-import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
 
-function Cards({productos}) {
+
+function Cards({productos,handleDeleteProduct,handleEditProduct,mostrarBotones}) {
   const images = ['Bondiola 1.png', 'Bondiola 2.png'];
   const [currentImage1, setCurrentImage1] = useState(0);
   const [currentImage2, setCurrentImage2] = useState(0);
@@ -17,9 +16,6 @@ function Cards({productos}) {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
  
-  const handlePedidoRealizado = (nuevosDatos) => {
-    setCart((prevCart) => [...prevCart, nuevosDatos]);
-  };
 
 
   const handleCloseForm = () => {
@@ -50,10 +46,10 @@ function Cards({productos}) {
    
       
       
-    <Grid templateColumns="repeat(3, 1fr)" gap={4} justifyContent="center">
+    <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={4} justifyContent="center">
     
     {productos?.map((producto, index) => (
-        <Box key={index} display="flex" justifyContent="center" flexWrap="wrap" >
+        <Box key={index} display="flex" justifyContent="center" flexWrap="wrap">
           <Card maxW={{ base: "200px", md: "300px" }} mx="auto">
             <CardBody>
               <Image
@@ -67,7 +63,7 @@ function Cards({productos}) {
               <Stack>
                 <Heading size='md'>{producto.nombre}</Heading>
                 <Text>
-                  {producto.ingredientes}
+                  {producto.salsas}
                 </Text>
                 <Text color='blue.600' fontSize='2xl'>
                   ${producto.precio}
@@ -76,9 +72,12 @@ function Cards({productos}) {
             </CardBody>
             <Divider />
             <CardFooter>
-              <ButtonGroup spacing='2'>
-                {/* Agrega aquí los botones para realizar acciones con el producto */}
-              </ButtonGroup>
+            {mostrarBotones && (  // Mostrar los botones solo si mostrarBotones es true
+                <ButtonGroup spacing='2'>
+                  <Button colorScheme="red" onClick={() => handleDeleteProduct(index)}>Eliminar</Button>
+                  <Button colorScheme="blue" onClick={() => handleEditProduct(index)}>Editar</Button>
+                </ButtonGroup>
+              )}
             </CardFooter>
             <HStack mt={4} justifyContent="center">
               <ChevronLeftIcon boxSize={8} cursor="pointer"  />

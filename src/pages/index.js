@@ -92,7 +92,7 @@ export default function Home() {
             <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
             <Chakra.ModalCloseButton />
             <Chakra.ModalBody>
-            {isCardsOpen && <Cards productos={productos} />}
+            {isCardsOpen && <Cards productos={productos}  />}
             </Chakra.ModalBody>
             {/* Aquí puedes agregar cualquier otro contenido o botones que desees mostrar en el pie del modal */}
             <Chakra.Box mt={4} textAlign="center">
