@@ -7,11 +7,14 @@ import Admin from '../components/Admin.jsx';
 import FormularioRealizarPedido from "@/components/FormularioRealizarPedido";
 import Cards from "../components/Cards"
 import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
+import Carrito from "../components/Carrito";
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = Chakra.useDisclosure();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isCardsOpen, setIsCardsOpen] = useState(false);
+  const [cart, setCart] = useState([]); // Estado para almacenar los productos del carrito
+  const [productos, setProductos] = useState([]);
 
   const handleOpenCards = () => {
     setIsCardsOpen(true);
@@ -35,7 +38,15 @@ export default function Home() {
     setIsFormOpen(false);
   };
   
-  const [productos, setProductos] = useState([]);
+
+  const handleEliminarProducto = (productoId) => {
+    // Filtras los productos que no tengan el mismo ID que el producto a eliminar
+    const updatedCart = cart.filter((producto) => producto.id !== productoId);
+    setCart(updatedCart);
+  };
+
+
+
 
 
 
@@ -92,7 +103,8 @@ export default function Home() {
             <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
             <Chakra.ModalCloseButton />
             <Chakra.ModalBody>
-            {isCardsOpen && <Cards productos={productos}  />}
+             {isCardsOpen && <Cards productos={productos} mostrarBotonAgregar={true} cart={cart} setCart={setCart} />}
+             <Carrito cart={cart} onEliminarProducto={handleEliminarProducto}  />
             </Chakra.ModalBody>
             {/* Aquí puedes agregar cualquier otro contenido o botones que desees mostrar en el pie del modal */}
             <Chakra.Box mt={4} textAlign="center">
@@ -103,7 +115,7 @@ export default function Home() {
             </Chakra.Box>
           </Chakra.ModalContent>
         </Chakra.Modal>
-        <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} />
+        <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} cart={cart} />
   </Chakra.Flex>
 );
 }

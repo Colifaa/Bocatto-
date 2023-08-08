@@ -5,21 +5,15 @@ import {
 } from '@chakra-ui/react';
 import Cards from '../components/Cards';
 import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
-export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedido }) {
-
+export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedido,cart}) {
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
   const [TipoServicio, setTipoServicio] = useState('Retirar');
   const [productosDisponiblesFormulario, setProductosDisponiblesFormulario] = useState([]);
 
-
-  const [cantidadProductos, setCantidadProductos] = useState({}); 
-
+  const [cantidadProductos, setCantidadProductos] = useState({});
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
-
-
-
 
   useEffect(() => {
     async function fetchProductosDisponibles() {
@@ -36,42 +30,25 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
 
   const enviarPedido = () => {
     const productosSeleccionados = [];
-  
-    productosDisponiblesFormulario.forEach((producto) => {
-      if (cantidadProductos[producto.id] > 0) {
-        const subtotalProducto = producto.precio * cantidadProductos[producto.id];
-        productosSeleccionados.push(`- x${cantidadProductos[producto.id]} ${producto.nombre} $${subtotalProducto}`);
-      }
+
+    cart.forEach((producto) => {
+      const subtotalProducto = producto.precio * producto.cantidad;
+      productosSeleccionados.push(`- x${producto.cantidad} ${producto.nombre} $${subtotalProducto}`);
     });
-  
-    let costoTotal = productosSeleccionados.reduce((total, producto) => {
-      const precioProducto = parseFloat(producto.match(/\$([0-9.]+)/)[1]);
-      return total + precioProducto;
-    }, 0);
-  
-    if (TipoServicio === "A domicilio") {
-      costoTotal += costoEnvio;
-    }
-  
+
+    const costoTotal = cart.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
+    const costoEnvio = TipoServicio === "A domicilio" ? 300 : 0;
+
     const mensajeProductos = productosSeleccionados.join("\n");
-    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nTeléfono: ${telefono} 💲 Costos\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
-  
+    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nTeléfono: ${telefono} 💲 Costos\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal + costoEnvio},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
+
     const mensajeCodificado = encodeURIComponent(mensajePedido);
-  
+
     const numeroDestino = '+542604224940'; // Cambiar por el número de WhatsApp correcto
     const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
-  
+
     window.open(enlaceWhatsApp, '_blank');
   };
-  
-
-  const handleCantidadChange = (productoId, cantidad) => {
-    setCantidadProductos((prevCantidad) => ({
-      ...prevCantidad,
-      [productoId]: cantidad,
-    }));
-  };
-  
  
 
   return (
@@ -204,59 +181,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
              
                
        
-              {productosDisponiblesFormulario.map(producto => (
-              <FormControl key={producto.id} mt={4}>
-                <FormLabel
-                  textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                  _hover={{
-                    cursor: 'pointer',
-                    borderBottomColor: 'teal.500',
-                    textShadow: 'none',
-                    transform: 'scale(1.1)',
-                  }}
-                  _focus={{
-                    outline: 'none',
-                    borderBottomColor: 'teal.500',
-                    textShadow: 'none',
-                  }}
-                >
-                  Cantidad de {producto.nombre}
-                </FormLabel>
-               
-                <Input
-                  fontSize={['sm', 'md', 'lg']}
-                  type="number"
-                  value={cantidadProductos[producto.id] || ''}
-                  onChange={(e) => handleCantidadChange(producto.id, e.target.value)}
-                  size={['xs', 'md', 'lg']}
-                  bg="teal.100"
-                  borderRadius="xl"
-                  _focus={{ outline: 'none', bg: 'white' }}
-                />
-                
-                <Box minHeight={['120px', '150px', '180px']} width={['90%', '80%', '70%']} mx="auto">
-                <FormHelperText
-                  textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['sm', 'md', 'lg']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                >
-                  Selecciona la cantidad de {producto.nombre} que deseas.
-                </FormHelperText>
-                </Box>
-              </FormControl>
-            ))}
+    
             
               </Flex>
               <HStack justifyContent="center">
