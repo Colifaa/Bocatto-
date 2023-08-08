@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import Cards from '../components/Cards';
 import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
+import FormularioRealizarPedido from '../components/FormularioRealizarPedido';
 
 function Admin() {
   const [showForm, setShowForm] = useState(false);
@@ -30,6 +31,12 @@ function Admin() {
   const [productos, setProductos] = useState([]); // Lista de productos
 
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario ha iniciado sesión
+
+
+  const [isFormularioOpen, setIsFormularioOpen] = useState(false);
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,13 +76,15 @@ function Admin() {
             .from('productos')
             .insert([nuevoProducto]);
 
-          if (error) {
-            console.error('Error al insertar producto en Supabase:', error);
-          } else {
-            console.log('Producto insertado en Supabase:', data);
-            setProductos([...productos, nuevoProducto]);
-            handleClose();
-          }
+            if (error) {
+              console.error('Error al insertar producto en Supabase:', error);
+            } else {
+              console.log('Producto insertado en Supabase:', data);
+              setProductos([...productos, nuevoProducto]);
+              setProductoSeleccionado(nuevoProducto);
+              setIsFormularioOpen(true);
+              handleClose();
+            }
         }
       };
       reader.readAsDataURL(imagenProducto);
