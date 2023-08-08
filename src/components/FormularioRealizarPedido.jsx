@@ -83,7 +83,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
        <Box >
           <VStack spacing={4} align="center">
           <form onSubmit={enviarPedido}>
-          <Flex justifyItems="flex-start" alignItems="center" mb={4}>
+          <Flex justifyItems="flex-start" alignItems="center" >
             <FormControl justifyItems="flex-start">
               <FormLabel
                 textAlign="center"
