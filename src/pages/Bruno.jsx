@@ -43,7 +43,7 @@ function Bruno() {
    
       {isLoggedIn ? (
         <>
-         <Admin />
+         <Admin  />
           <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" onClick={handleLogout}>Cerrar sesión</Chakra.Button>
           <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" onClick={handleGoToHome}>Ir al Home</Chakra.Button>
         </>
@@ -57,6 +57,7 @@ function Bruno() {
           />
         </>
       )}
+       
       </Chakra.VStack>
  
   );

@@ -1,11 +1,12 @@
 import * as Chakra from "@chakra-ui/react";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
 import FormularioInicioSesion from '../components/FormularioInicioSesion';
 import Admin from '../components/Admin.jsx';
 import FormularioRealizarPedido from "@/components/FormularioRealizarPedido";
 import Cards from "../components/Cards"
+import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = Chakra.useDisclosure();
@@ -34,44 +35,27 @@ export default function Home() {
     setIsFormOpen(false);
   };
   
-  const [nombre, setNombre] = useState('');
-  const [telefono, setTelefono] = useState('');
-  const [metodoPago, setMetodoPago] = useState('Efectivo');
-  const [TipoServicio, setTipoServicio] = useState('');
-
-  const [cantidadBondiOlocos, setCantidadBondiOlocos] = useState(1); // Valor predeterminado de 1
-
-  const [nombreUsuario, setNombreUsuario] = useState('');
-  const [contrasena, setContrasena] = useState('');
-  const [estaAutenticado, setEstaAutenticado] = useState(false);
+  const [productos, setProductos] = useState([]);
 
 
-  // Otros inputs de contacto y pedido
-  const enviarPedido = () => {
 
-    const costoProductos = 2000; // Costo por unidad de "Bondi-O-Loco"
-    const costoEnvio = 300;
-    const costoTotal = costoProductos * cantidadBondiOlocos + costoEnvio;
+  useEffect(() => {
+    // Aquí realizas la llamada a Supabase para obtener los productos
+    async function fetchProductos() {
+      const { data, error } = await supabase.from('productos').select('*');
+      if (error) {
+        console.error('Error al obtener productos:', error);
+      } else {
+        setProductos(data);
+      }
+    }
 
-    // Construir el mensaje de WhatsApp con los datos del pedido
-    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nTeléfono: ${telefono}\n\nMétodo de pago: ${metodoPago} - A coordinar\n\n💲 Costos\nCosto de los productos: $${costoProductos * cantidadBondiOlocos},00\nCosto de entrega: $${costoEnvio},00\nTotal a pagar: $${costoTotal},00\n\n📝 Pedido\n\n- x${cantidadBondiOlocos} Bondi-O-Loco $${costoProductos * cantidadBondiOlocos},00\n  Precio unitario $${costoProductos},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
+    fetchProductos();
+  }, []);
 
-    // Codificar el mensaje para que sea válido en la URL
-    const mensajeCodificado = encodeURIComponent(mensajePedido);
 
-    // Construir el enlace de WhatsApp con el mensaje predefinido
-    const numeroDestino = '+542604224940';
-    const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
 
-    // Abrir el enlace de WhatsApp en una nueva ventana o pestaña
-    window.open(enlaceWhatsApp, '_blank');
-  };
-
-  const handleProductoAgregado = (nuevoProducto) => {
-    // Agrega el nuevo producto al estado cart o cualquier otro estado que estés utilizando en el componente Cards.
-    // Por ejemplo:
-    setCart((prevCart) => [...prevCart, nuevoProducto]);
-  };
+ 
   
   return (
     <Chakra.Flex height="100vh" alignItems="center" justifyContent="center">
@@ -108,7 +92,7 @@ export default function Home() {
             <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
             <Chakra.ModalCloseButton />
             <Chakra.ModalBody>
-              {isCardsOpen &&  <Cards onProductoAgregado={handleProductoAgregado} />}
+            {isCardsOpen && <Cards productos={productos}  />}
             </Chakra.ModalBody>
             {/* Aquí puedes agregar cualquier otro contenido o botones que desees mostrar en el pie del modal */}
             <Chakra.Box mt={4} textAlign="center">
