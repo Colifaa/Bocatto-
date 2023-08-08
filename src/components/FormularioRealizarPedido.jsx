@@ -1,64 +1,86 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, FormHelperText, VStack, Select, HStack, Button, IconButton, Box, Flex
 } from '@chakra-ui/react';
 import Cards from '../components/Cards';
-
+import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
 export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedido }) {
 
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
-  const [metodoPago, setMetodoPago] = useState('Efectivo');
   const [TipoServicio, setTipoServicio] = useState('Retirar');
+  const [productosDisponiblesFormulario, setProductosDisponiblesFormulario] = useState([]);
 
-  const [cantidadBondiOlocos, setCantidadBondiOlocos] = useState(1); // Valor predeterminado de 1
-  const [CantidadOsobuco, setCantidadOsobuco] = useState(1); // Valor predeterminado de 1
+
+  const [cantidadProductos, setCantidadProductos] = useState({}); 
 
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
 
 
 
-  const handleLogin = () => {
-    // Aquí debes implementar la lógica para verificar las credenciales del administrador
-    // Por ejemplo, puedes hacer una solicitud a tu servidor para validar las credenciales
-    if (nombreUsuario === 'admin' && contrasena === 'admin123') {
-      setEstaAutenticado(true);
-      onClose(); // Cierra el formulario después del inicio de sesión exitoso
-    } else {
-      alert('Credenciales inválidas');
+
+  useEffect(() => {
+    async function fetchProductosDisponibles() {
+      const { data, error } = await supabase.from('productos').select('*');
+      if (error) {
+        console.error('Error al obtener productos:', error);
+      } else {
+        setProductosDisponiblesFormulario(data);
+      }
     }
-  };
 
-  // Otros inputs de contacto y pedido
+    fetchProductosDisponibles();
+  }, []);
+
   const enviarPedido = () => {
-
-    const costoProductos = 2000; // Costo por unidad de "Bondi-O-Loco"
-    const costoEnvio = 300;
-    const costoTotal = (costoProductos * cantidadBondiOlocos) + (costoProductos * CantidadOsobuco) + costoEnvio;
-
-
-    // Construir el mensaje de WhatsApp con los datos del pedido
-    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nTeléfono: ${telefono} 💲 Costos\nCosto de los productos: $${costoProductos * cantidadBondiOlocos} $${costoProductos * CantidadOsobuco} \nCosto de entrega: $${costoEnvio},00\nTotal a pagar: $${costoTotal},00\n\n📝 Pedido\n\n- x${cantidadBondiOlocos} Bondi-O-Loco $${costoProductos * cantidadBondiOlocos}\n  \n\n- x${CantidadOsobuco} Osobuco $${costoProductos * CantidadOsobuco}\n   Precio unitario $${costoProductos},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
-
-    // Codificar el mensaje para que sea válido en la URL
+    const productosSeleccionados = [];
+  
+    productosDisponiblesFormulario.forEach((producto) => {
+      if (cantidadProductos[producto.id] > 0) {
+        const subtotalProducto = producto.precio * cantidadProductos[producto.id];
+        productosSeleccionados.push(`- x${cantidadProductos[producto.id]} ${producto.nombre} $${subtotalProducto}`);
+      }
+    });
+  
+    let costoTotal = productosSeleccionados.reduce((total, producto) => {
+      const precioProducto = parseFloat(producto.match(/\$([0-9.]+)/)[1]);
+      return total + precioProducto;
+    }, 0);
+  
+    if (TipoServicio === "A domicilio") {
+      costoTotal += costoEnvio;
+    }
+  
+    const mensajeProductos = productosSeleccionados.join("\n");
+    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nTeléfono: ${telefono} 💲 Costos\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
+  
     const mensajeCodificado = encodeURIComponent(mensajePedido);
-
-    // Construir el enlace de WhatsApp con el mensaje predefinido
-    const numeroDestino = '+542604224940';
+  
+    const numeroDestino = '+542604224940'; // Cambiar por el número de WhatsApp correcto
     const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
-
-    // Abrir el enlace de WhatsApp en una nueva ventana o pestaña
+  
     window.open(enlaceWhatsApp, '_blank');
   };
+  
+
+  const handleCantidadChange = (productoId, cantidad) => {
+    setCantidadProductos((prevCantidad) => ({
+      ...prevCantidad,
+      [productoId]: cantidad,
+    }));
+  };
+  
+ 
 
   return (
 
     <Modal isOpen={isOpen} onClose={onClose} size="full">
     <ModalOverlay />
     <ModalContent color="blackAlpha.800" alignItems="center" bgSize="">
-      <ModalHeader fontSize={['xl', '2xl', '3xl']}>  <Box >
+    <ModalHeader fontSize={['xl', '2xl', '3xl']}>
+       <Box >
           <VStack spacing={4} align="center">
           <form onSubmit={enviarPedido}>
           <Flex justifyItems="flex-start" alignItems="center" mb={4}>
@@ -100,7 +122,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
               >Indicar nombre del producto.</FormHelperText>
             </FormControl>
 
-              <FormControl mt={4}>
+              <FormControl justifyItems="flex-start" >
                 <FormLabel textAlign="center"
                   fontWeight="bold"
                   fontSize={['md', 'lg', 'xl']}
@@ -111,12 +133,13 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   transition="all 0.2s ease-in-out"
                   _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
                   _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}>Teléfono</FormLabel>
+                   
                 <Input
-                  fontSize='15px'
+                   fontSize={['sm', 'md', 'lg']}
                   type="tel"
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
-                  size={['xs', 'md','sm']}
+                  size={['xs', 'md', 'lg']}
                   bg="teal.100"
                   borderRadius="xl"
                   _focus={{ outline: 'none', bg: 'white' }}
@@ -178,68 +201,68 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
 
 
               <Flex justifyItems="flex-start" alignItems="center" mb={4}>
-              <FormControl mt={4}>
-                <FormLabel textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                  _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
-                  _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}>Cantidad de Bondi-Olocos</FormLabel>
-                <Input
-                  type="number"
-                  value={cantidadBondiOlocos}
-                  onChange={(e) => setCantidadBondiOlocos(e.target.value)}
-                  size="sm"
-                />
-                <FormHelperText textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                >Indicar cantidad de productos.</FormHelperText>
-              </FormControl>
-
-
-              <FormControl mt={4}>
-                <FormLabel textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                  _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
-                  _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}>Cantidad de Osobuco</FormLabel>
-                <Input
-                  type="number"
-                  value={CantidadOsobuco}
-                  onChange={(e) => setCantidadOsobuco(e.target.value)}
-                  size="sm"
-                />
-                <FormHelperText textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                >Indicar cantidad de productos.</FormHelperText>
+             
                
+       
+              {productosDisponiblesFormulario.map(producto => (
+              <FormControl key={producto.id} mt={4}>
+                <FormLabel
+                  textAlign="center"
+                  fontWeight="bold"
+                  fontSize={['md', 'lg', 'xl']}
+                  color="black.500"
+                  pb={2}
+                  textShadow="1px 1px 2px teal.300"
+                  borderBottom="2px solid teal.400"
+                  transition="all 0.2s ease-in-out"
+                  _hover={{
+                    cursor: 'pointer',
+                    borderBottomColor: 'teal.500',
+                    textShadow: 'none',
+                    transform: 'scale(1.1)',
+                  }}
+                  _focus={{
+                    outline: 'none',
+                    borderBottomColor: 'teal.500',
+                    textShadow: 'none',
+                  }}
+                >
+                  Cantidad de {producto.nombre}
+                </FormLabel>
+               
+                <Input
+                  fontSize={['sm', 'md', 'lg']}
+                  type="number"
+                  value={cantidadProductos[producto.id] || ''}
+                  onChange={(e) => handleCantidadChange(producto.id, e.target.value)}
+                  size={['xs', 'md', 'lg']}
+                  bg="teal.100"
+                  borderRadius="xl"
+                  _focus={{ outline: 'none', bg: 'white' }}
+                />
+                
+                <Box minHeight={['120px', '150px', '180px']} width={['90%', '80%', '70%']} mx="auto">
+                <FormHelperText
+                  textAlign="center"
+                  fontWeight="bold"
+                  fontSize={['sm', 'md', 'lg']}
+                  color="black.500"
+                  pb={2}
+                  textShadow="1px 1px 2px teal.300"
+                  borderBottom="2px solid teal.400"
+                  transition="all 0.2s ease-in-out"
+                >
+                  Selecciona la cantidad de {producto.nombre} que deseas.
+                </FormHelperText>
+                </Box>
               </FormControl>
+            ))}
+            
               </Flex>
               <HStack justifyContent="center">
-            <Button type="submit" mt={4} colorScheme="teal">
-              Agregar Producto
-            </Button>
+              <Button type="submit" mt={4} colorScheme="teal">
+  Enviar Pedido
+</Button>
           </HStack>
         </form>
         </VStack>
