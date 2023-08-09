@@ -130,42 +130,45 @@ export default function Home() {
           <Chakra.Box mt={4} textAlign="center">
             {/* Botón "Buy now" dentro del modal */}
             <Chakra.Alert
-              marginBottom="10"
-              status="warning"
-              variant='subtle'
-              flexDirection='column'
-              alignItems='center'
-              justifyContent='center'
-              textAlign='center'
-              height='200px'
-              display={isAlertOpen ? 'block' : 'none'} // Mostrar el alert solo si isAlertOpen es true
-              onClose={() => setAlertOpen(false)} // Cerrar el alert
-            >
-              <Chakra.AlertIcon boxSize="40px" display="flex" justifyContent="center" alignItems="center" margin="auto" />
-              <Chakra.AlertTitle mt={4} mb={1} fontSize="lg" color="red.600">
-                Debes agregar productos al carrito para realizar la compra.
+  position="absolute"
+  bottom="45px"
+  status="warning"
+  variant='subtle'
+  flexDirection='column'
+  alignItems='center'
+  justifyContent='center'
+  textAlign='center'
+  height='200px'
+  left="50%" // Centra horizontalmente el alert
+  transform="translateX(-50%)" // Ajusta el centro horizontal
+  width={['80%', '60%', '50%']} // Ancho responsivo
+  display={isAlertOpen ? 'block' : 'none'}
+  onClose={() => setAlertOpen(false)}
+>
+<Chakra.AlertIcon boxSize="40px" display="flex" justifyContent="center" alignItems="center" margin="auto" />
+<Chakra.AlertTitle mt={4} mb={1} fontSize={['md', 'lg', 'lg']} color="red.600">
+                Debes agregar productos  para realizar la compra.
               </Chakra.AlertTitle>
-              <Chakra.AlertDescription maxWidth='sm'>
+              <Chakra.AlertDescription maxWidth={['60%', '80%', '80%']}>
                 <Chakra.Button
                   variant="solid"
                   colorScheme="teal"
                   mb="-10"
-
                   onClick={() => setAlertOpen(false)} // Cerrar el alert cuando se haga clic en el botón
-
                 >
                   Cerrar
                 </Chakra.Button>
               </Chakra.AlertDescription>
             </Chakra.Alert>
             <Chakra.Button
-
-              variant='solid'
-              colorScheme='blue'
-              bgColor="#000000"
-              onClick={handleOpenForm}
-              disabled={cart.length === 0}
-            >
+  position="relative"
+  bottom="0" // Fija el botón en la parte inferior del contenedor
+  variant='solid'
+  colorScheme='blue'
+  bgColor="#000000"
+  onClick={handleOpenForm}
+  disabled={cart.length === 0}
+>
               Buy now
             </Chakra.Button>
           </Chakra.Box>
