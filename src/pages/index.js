@@ -76,11 +76,14 @@ export default function Home() {
  
   
   return (
-    <Chakra.Flex height="100vh" alignItems="flex-start" justifyContent="center"  bgColor="#FF5733"  bgImage="Bocatto.png" bgSize="cover" bgPos="center" bgRepeat="no-repeat">
-     
+
+
+    <Chakra.Flex height="100vh" alignItems="center" justifyContent="center"  bgColor="white"  bgImage="Nombre.jpg" bgSize="initial"  bgRepeat="no-repeat" bgPos="top">
+      
+
+
   
-     <Chakra.VStack spacing={4} align="center" justifyContent="center">
-        <Chakra.Text fontSize={['4xl', '5xl', '6xl']} color="#FF5733">Boccato</Chakra.Text>
+     <Chakra.VStack marginTop="28" spacing={4} align="center" justifyContent="center">
         <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">•Sanguches de Bondiola• Los verdaderos 🔥🔥 📍 SAN RAFAEL - MENDOZA</Chakra.Text>
         <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">Para llevar🏍️</Chakra.Text>
         <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">A domicilio🏁</Chakra.Text>
@@ -95,7 +98,16 @@ export default function Home() {
             </span>
           </Chakra.VStack>
         </Chakra.Button>
-  
+        <Chakra.Box display="flex" justifyContent="center" marginTop="18">
+  <Chakra.Image
+    width="50%"
+    height="auto" 
+    maxW="100%" 
+    src="Sanguche.jpg"
+    alt="Imagen del sándwich"
+  />
+</Chakra.Box>
+
       </Chakra.VStack>
   
       <Chakra.Modal size="full" isOpen={isOpen} onClose={handleCloseModal}>
@@ -147,11 +159,14 @@ export default function Home() {
         </Chakra.ModalContent>
       </Chakra.Modal>
       <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} cart={cart} />
+       
       <Chakra.Box position="absolute" bottom={0} width="100%">
         <Footer />
+        
       </Chakra.Box>
     
     </Chakra.Flex>
+    
     
   );
 }
