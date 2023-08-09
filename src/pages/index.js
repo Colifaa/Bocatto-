@@ -78,19 +78,25 @@ export default function Home() {
   return (
 
 
-    <Chakra.Flex height="100vh" alignItems="center" justifyContent="center" >
+    <Chakra.Flex
+    height="100vh"
+    alignItems="center"
+    justifyContent="center"
+    flexDirection="column" 
+    bgColor="white"
+  >
       
 
 
   
      <Chakra.VStack  spacing={4} align="center" justifyContent="center" >
-     <Chakra.Box display="flex" justifyContent="center" mb="30">
+     <Chakra.Box display="flex" justifyContent="center" mb="4">
   <Chakra.Image
-    width="50%"
-    height="auto" 
-    maxW="50%" 
-    src="Nombre.jpg"
-    alt="Imagen del sándwich"
+   width={['80%', '60%', '50%']} 
+   height="auto"
+   maxW="100%"
+   src="Nombre.jpg"
+   alt="Imagen del sándwich"
   />
 </Chakra.Box>
 
@@ -102,20 +108,21 @@ export default function Home() {
         {/* Botón para mostrar el componente "Cards" en el modal */}
         <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" bgColor="#000000" onClick={handleOpenModal}>
           Realizar Pedido
-          <Chakra.VStack align="center" spacing={4}>
+          <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%">
             <span role="img" aria-label="lomito" style={{ color: "#FF5733" }}>
               🍖
             </span>
           </Chakra.VStack>
         </Chakra.Button>
-        <Chakra.Box display="flex" justifyContent="center" marginTop="15">
+        <Chakra.Box display="flex" justifyContent="center" >
   <Chakra.Image
-    width="50%"
+  width={['80%', '60%', '50%']} 
     height="auto" 
     maxW="100%" 
     src="Sanguche.jpg"
     alt="Imagen del sándwich"
   />
+   
 </Chakra.Box>
 
       </Chakra.VStack>
@@ -170,7 +177,7 @@ export default function Home() {
       </Chakra.Modal>
       <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} cart={cart} />
        
-      <Chakra.Box position="absolute" bottom={0} width="100%">
+      <Chakra.Box mt="-5" mb="-5">
         <Footer />
         
       </Chakra.Box>
