@@ -8,6 +8,8 @@ import FormularioRealizarPedido from "@/components/FormularioRealizarPedido";
 import Cards from "../components/Cards"
 import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
 import Carrito from "../components/Carrito";
+import Footer from "../components/Footer";
+
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = Chakra.useDisclosure();
@@ -15,6 +17,7 @@ export default function Home() {
   const [isCardsOpen, setIsCardsOpen] = useState(false);
   const [cart, setCart] = useState([]); // Estado para almacenar los productos del carrito
   const [productos, setProductos] = useState([]);
+  const [isAlertOpen, setAlertOpen] = useState(false);
 
   const handleOpenCards = () => {
     setIsCardsOpen(true);
@@ -31,8 +34,12 @@ export default function Home() {
   };
 
   const handleOpenForm = () => {
+  if (cart.length > 0) {
     setIsFormOpen(true);
-  };
+  } else {
+    setAlertOpen(true); // Agrega esto para mostrar el alert
+  }
+};
 
   const handleCloseForm = () => {
     setIsFormOpen(false);
@@ -69,53 +76,82 @@ export default function Home() {
  
   
   return (
-    <Chakra.Flex height="100vh" alignItems="center" justifyContent="center">
-    <Chakra.VStack spacing={4} align="center">
-
-      <Chakra.Text fontSize={['4xl', '5xl', '6xl']}>Boccato</Chakra.Text>
-      <Chakra.Text fontSize={['xl', '2xl', '3xl']}>•Sanguches de Bondiola• Los verdaderos 🔥🔥 📍 SAN RAFAEL - MENDOZA</Chakra.Text>
-      <Chakra.Text fontSize={['xl', '2xl', '3xl']}>
-        Para llevar🏍️
-      </Chakra.Text>
-      <Chakra.Text fontSize={['xl', '2xl', '3xl']}>
-        A domicilio🏁
-      </Chakra.Text>
-      <Chakra.Text fontSize={['xl', '2xl', '3xl']}>
-        Buenos Aires 60, M5600 FZB, Mendoza, Argentina
-      </Chakra.Text>
-      
-
-     {/* Botón para mostrar el componente "Cards" en el modal */}
-     <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" onClick={handleOpenModal}>
-        Realizar Pedido
-        <Chakra.VStack align="center" spacing={4}>
-          <span role="img" aria-label="lomito">
-            🍖
-          </span>
-        </Chakra.VStack>
-      </Chakra.Button>
-
-    </Chakra.VStack>
+    <Chakra.Flex height="100vh" alignItems="flex-start" justifyContent="center"  bgColor="#FF5733"  bgImage="Bocatto.png" bgSize="cover" bgPos="center" bgRepeat="no-repeat">
+     
+  
+     <Chakra.VStack spacing={4} align="center" justifyContent="center">
+        <Chakra.Text fontSize={['4xl', '5xl', '6xl']} color="#FF5733">Boccato</Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">•Sanguches de Bondiola• Los verdaderos 🔥🔥 📍 SAN RAFAEL - MENDOZA</Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">Para llevar🏍️</Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">A domicilio🏁</Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">Buenos Aires 60, M5600 FZB, Mendoza, Argentina</Chakra.Text>
+  
+        {/* Botón para mostrar el componente "Cards" en el modal */}
+        <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" bgColor="#000000" onClick={handleOpenModal}>
+          Realizar Pedido
+          <Chakra.VStack align="center" spacing={4}>
+            <span role="img" aria-label="lomito" style={{ color: "#FF5733" }}>
+              🍖
+            </span>
+          </Chakra.VStack>
+        </Chakra.Button>
+  
+      </Chakra.VStack>
+  
+      <Chakra.Modal size="full" isOpen={isOpen} onClose={handleCloseModal}>
+        <Chakra.ModalOverlay />
+        <Chakra.ModalContent bgColor="#FF5733" color="#FFFFFF">
+          <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
+          <Chakra.ModalCloseButton />
+          <Chakra.ModalBody>
+            {isCardsOpen && <Cards productos={productos} mostrarBotonAgregar={true} cart={cart} setCart={setCart} />}
+            <Carrito cart={cart} onEliminarProducto={handleEliminarProducto} />
+          </Chakra.ModalBody>
+          {/* Aquí puedes agregar cualquier otro contenido o botones que desees mostrar en el pie del modal */}
+          <Chakra.Box mt={4} textAlign="center">
+            {/* Botón "Buy now" dentro del modal */}
+            <Chakra.Alert
+      status="warning"
+      variant="subtle"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      textAlign="center"
+      display={isAlertOpen ? 'block' : 'none'} // Mostrar el alert solo si isAlertOpen es true
+      onClose={() => setAlertOpen(false)} // Cerrar el alert
+    >
+      <Chakra.AlertIcon boxSize="40px" mr={0} />
+      <Chakra.AlertTitle mt={4} mb={1} fontSize="lg">
+        Debes agregar productos al carrito para realizar la compra.
+      </Chakra.AlertTitle>
+      <Chakra.AlertDescription>
+        <Chakra.Button
+          variant="solid"
+          colorScheme="blue"
+          onClick={() => setAlertOpen(false)} // Cerrar el alert cuando se haga clic en el botón
+        >
+          Cerrar
+        </Chakra.Button>
+      </Chakra.AlertDescription>
+    </Chakra.Alert>
+    <Chakra.Button
+      variant='solid'
+      colorScheme='blue'
+      bgColor="#000000"
+      onClick={handleOpenForm}
+      disabled={cart.length === 0}
+    >
+      Buy now
+    </Chakra.Button>
+          </Chakra.Box>
+        </Chakra.ModalContent>
+      </Chakra.Modal>
+      <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} cart={cart} />
+      <Chakra.Box position="absolute" bottom={0} width="100%">
+        <Footer />
+      </Chakra.Box>
     
-    <Chakra.Modal size="full" isOpen={isOpen} onClose={handleCloseModal}>
-          <Chakra.ModalOverlay />
-          <Chakra.ModalContent>
-            <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
-            <Chakra.ModalCloseButton />
-            <Chakra.ModalBody>
-             {isCardsOpen && <Cards productos={productos} mostrarBotonAgregar={true} cart={cart} setCart={setCart} />}
-             <Carrito cart={cart} onEliminarProducto={handleEliminarProducto}  />
-            </Chakra.ModalBody>
-            {/* Aquí puedes agregar cualquier otro contenido o botones que desees mostrar en el pie del modal */}
-            <Chakra.Box mt={4} textAlign="center">
-              {/* Botón "Buy now" dentro del modal */}
-              <Chakra.Button variant='solid' colorScheme='blue' onClick={handleOpenForm}>
-                Buy now
-              </Chakra.Button>
-            </Chakra.Box>
-          </Chakra.ModalContent>
-        </Chakra.Modal>
-        <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} cart={cart} />
-  </Chakra.Flex>
-);
+    </Chakra.Flex>
+    
+  );
 }

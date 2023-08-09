@@ -4,16 +4,14 @@ import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, FormHelperText, VStack, Select, HStack, Button, IconButton, Box, Flex
 } from '@chakra-ui/react';
 import Cards from '../components/Cards';
-import { supabase } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
+import { supabase, storage } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
 export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedido,cart}) {
   const [nombre, setNombre] = useState('');
-  const [telefono, setTelefono] = useState('');
+  const [domicilio, setDomicilio] = useState('');
   const [TipoServicio, setTipoServicio] = useState('Retirar');
   const [productosDisponiblesFormulario, setProductosDisponiblesFormulario] = useState([]);
 
-  const [cantidadProductos, setCantidadProductos] = useState({});
-  const [nombreUsuario, setNombreUsuario] = useState('');
-  const [contrasena, setContrasena] = useState('');
+
 
   useEffect(() => {
     async function fetchProductosDisponibles() {
@@ -40,7 +38,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
     const costoEnvio = TipoServicio === "A domicilio" ? 300 : 0;
 
     const mensajeProductos = productosSeleccionados.join("\n");
-    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nTeléfono: ${telefono} 💲 Costos\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal + costoEnvio},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
+    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nDomicilio: ${domicilio} \n\n 💲 Costos:\n\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal + costoEnvio},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
 
     const mensajeCodificado = encodeURIComponent(mensajePedido);
 
@@ -52,54 +50,53 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
  
 
   return (
-
-    <Modal isOpen={isOpen} onClose={onClose} size="full">
-    <ModalOverlay />
-    <ModalContent color="blackAlpha.800" alignItems="center" bgSize="">
+<Modal isOpen={isOpen} onClose={onClose} size="full">
+  <ModalOverlay />
+  <ModalContent color="blackAlpha.800" alignItems="center">
     <ModalHeader fontSize={['xl', '2xl', '3xl']}>
-       <Box >
-          <VStack spacing={4} align="center">
+      <Box>
+        <VStack spacing={4} align="center">
           <form onSubmit={enviarPedido}>
-          <Flex justifyItems="flex-start" alignItems="center" >
-            <FormControl justifyItems="flex-start">
-              <FormLabel
-                textAlign="center"
-                fontWeight="bold"
-                fontSize={['md', 'lg', 'xl']}
-                color="black.500"
-                pb={2}
-                textShadow="1px 1px 2px teal.300"
-                borderBottom="2px solid teal.400"
-                transition="all 0.2s ease-in-out"
-                _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
-                _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}
-              >
-                Nombre
-              </FormLabel>
-  
-              <Input  
-                fontSize={['sm', 'md', 'lg']}
-                type="text"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                size={['xs', 'md', 'lg']}
-                bg="teal.100"
-                borderRadius="xl"
-                _focus={{ outline: 'none', bg: 'white' }}
-              />
-  
-              <FormHelperText textAlign="center"
-                fontWeight="bold"
-                fontSize={['sm', 'md', 'lg']}
-                color="black.500"
-                pb={2}
-                textShadow="1px 1px 2px teal.300"
-                borderBottom="2px solid teal.400"
-                transition="all 0.2s ease-in-out"
-              >Indicar nombre del producto.</FormHelperText>
-            </FormControl>
+            <Flex justifyItems="flex-start" alignItems="center">
+              <FormControl justifyItems="flex-start">
+                <FormLabel
+                  textAlign="center"
+                  fontWeight="bold"
+                  fontSize={['md', 'lg', 'xl']}
+                  color="black.500"
+                  pb={2}
+                  textShadow="1px 1px 2px teal.300"
+                  borderBottom="2px solid teal.400"
+                  transition="all 0.2s ease-in-out"
+                  _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
+                  _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}
+                >
+                  Nombre
+                </FormLabel>
 
-              <FormControl justifyItems="flex-start" >
+                <Input
+                  fontSize={['sm', 'md', 'lg']}
+                  type="text"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  size={['xs', 'md', 'lg']}
+                  bg="teal.100"
+                  borderRadius="xl"
+                  _focus={{ outline: 'none', bg: 'white' }}
+                />
+
+                <FormHelperText textAlign="center"
+             fontWeight="bold"
+             fontSize={['md', 'lg', 'xl']}
+             color="black.500"
+             pb={2}
+             textShadow="1px 1px 2px teal.300"
+             borderBottom="2px solid teal.400"
+             transition="all 0.2s ease-in-out"
+                >Indicar nombre.</FormHelperText>
+              </FormControl>
+
+              <FormControl justifyItems="flex-start">
                 <FormLabel textAlign="center"
                   fontWeight="bold"
                   fontSize={['md', 'lg', 'xl']}
@@ -109,13 +106,13 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   borderBottom="2px solid teal.400"
                   transition="all 0.2s ease-in-out"
                   _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
-                  _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}>Teléfono</FormLabel>
-                   
+                  _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }}>Domicilio</FormLabel>
+
                 <Input
-                   fontSize={['sm', 'md', 'lg']}
-                  type="tel"
-                  value={telefono}
-                  onChange={(e) => setTelefono(e.target.value)}
+                  fontSize={['sm', 'md', 'lg']}
+                  type="text"
+                  value={domicilio}
+                  onChange={(e) => setDomicilio(e.target.value)}
                   size={['xs', 'md', 'lg']}
                   bg="teal.100"
                   borderRadius="xl"
@@ -129,82 +126,75 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   textShadow="1px 1px 2px teal.300"
                   borderBottom="2px solid teal.400"
                   transition="all 0.2s ease-in-out"
-                >Indicar número de teléfono.</FormHelperText>
+                >Indicar Domicilio.</FormHelperText>
               </FormControl>
-              </Flex>
-           
+            </Flex>
 
-              <FormControl mt="4">
-                <FormLabel textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                  _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
-                  _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }} >Servicio:</FormLabel>
-                <Select
-   fontSize='15px'
-   size="sm"
-   color="red.500"
-   fontWeight="bold"
-   borderRadius="md"
-   _focus={{
-     outline: 'none', // Remueve el contorno al seleccionar el select
-     boxShadow: 'none', // Remueve la sombra al seleccionar el select
-   }}
-   _selected={{
-     bg: 'purple.500', // Color de fondo cuando se selecciona una opción
-   }}
-                  value={TipoServicio}
-                  onChange={(e) => setTipoServicio(e.target.value)}
-                >
-                  <option style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="Retirar">Retirar</option>
-                  <option style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="A domicilio">A domicilio</option>
-                  {/* Agrega más opciones de tipos de servicio si es necesario */}
-                </Select>
-                <FormHelperText textAlign="center"
-                  fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
-                  pb={2}
-                  textShadow="1px 1px 2px teal.300"
-                  borderBottom="2px solid teal.400"
-                  transition="all 0.2s ease-in-out"
-                >Indicar tipo de servicio.</FormHelperText>
-              </FormControl>
+            <FormControl mt="4">
+              <FormLabel textAlign="center"
+                fontWeight="bold"
+                fontSize={['md', 'lg', 'xl']}
+                color="black.500"
+                pb={2}
+                textShadow="1px 1px 2px teal.300"
+                borderBottom="2px solid teal.400"
+                transition="all 0.2s ease-in-out"
+                _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
+                _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }} >Servicio:</FormLabel>
+              <Select
+                fontSize='15px'
+                size="sm"
+                color="red.500"
+                fontWeight="bold"
+                borderRadius="md"
+                _focus={{
+                  outline: 'none', // Remueve el contorno al seleccionar el select
+                  boxShadow: 'none', // Remueve la sombra al seleccionar el select
+                }}
+                _selected={{
+                  bg: 'purple.500', // Color de fondo cuando se selecciona una opción
+                }}
+                value={TipoServicio}
+                onChange={(e) => setTipoServicio(e.target.value)}
+              >
+                <option style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="Retirar">Retirar</option>
+                <option style={{ fontSize: '15px', fontFamily: 'Arial', backgroundColor: 'teal', color: 'red' }} value="A domicilio">A domicilio</option>
+                {/* Agrega más opciones de tipos de servicio si es necesario */}
+              </Select>
+              <FormHelperText textAlign="center"
+                fontWeight="bold"
+                fontSize={['md', 'lg', 'xl']}
+                color="black.500"
+                pb={2}
+                textShadow="1px 1px 2px teal.300"
+                borderBottom="2px solid teal.400"
+                transition="all 0.2s ease-in-out"
+              >Indicar tipo de servicio.</FormHelperText>
+            </FormControl>
 
+            <Flex justifyItems="flex-start" alignItems="center" mb={4}>
+              {/* Agregar más campos del formulario si es necesario */}
+            </Flex>
 
-              <Flex justifyItems="flex-start" alignItems="center" mb={4}>
-             
-               
-       
-    
-            
-              </Flex>
-              <HStack justifyContent="center">
+            <HStack justifyContent="center">
               <Button type="submit" mt={4} colorScheme="teal">
-  Enviar Pedido
-</Button>
-          </HStack>
-        </form>
+                Enviar Pedido
+              </Button>
+            </HStack>
+          </form>
         </VStack>
-        </Box></ModalHeader>
-      <ModalCloseButton />
+      </Box>
+    </ModalHeader>
+    <ModalCloseButton />
 
-      <ModalBody>
-      
-      </ModalBody>
+    <ModalBody>
 
-      <ModalFooter justifyContent="center" bg="gray.100">
-    
+    </ModalBody>
 
+    <ModalFooter justifyContent="center" bg="gray.100">
 
-      </ModalFooter>
-    </ModalContent>
-  </Modal>
-
+    </ModalFooter>
+  </ModalContent>
+</Modal>
   );
 }

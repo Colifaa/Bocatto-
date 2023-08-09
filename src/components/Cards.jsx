@@ -37,27 +37,28 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
   return (
     <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={2} justifyContent="center">
       {productos?.map((producto, index) => (
-        <Box key={index} display="flex" justifyContent="center" flexWrap="wrap">
-          <Card maxW={{ base: "200px", md: "300px" }} mx="auto">
+        <Box key={index} display="flex" justifyContent="center" flexWrap="wrap" >
+          <Card maxW={{ base: "200px", md: "300px" }} mx="auto" bgColor="#000000" color="#FFFFFF" alignItems="center">
             <CardBody>
               <Image
                 src={producto.imagen}
                 alt={`Imagen de ${producto.nombre}`}
                 borderRadius='lg'
                 border="4px"
+                borderColor="#FF5733"
                 boxSize={{ base: "150px", md: "250px" }}
               />
               <Stack>
-                <Heading size='md'>{producto.nombre}</Heading>
+                <Heading mt="4" size="lg" >{producto.nombre}</Heading>
                 <Text>
                   {producto.salsas}
                 </Text>
-                <Text color='blue.600' fontSize='2xl'>
+                <Text color='#FF5733' fontSize='2xl'>
                   ${producto.precio}
                 </Text>
               </Stack>
             </CardBody>
-            <Divider />
+            <Divider borderColor="#FF5733" />
             <CardFooter>
               {mostrarBotones && (
                 <ButtonGroup spacing='2'>
@@ -67,12 +68,12 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
               )}
             </CardFooter>
             <CardFooter>
-  {mostrarBotonAgregar && (
-    <Button colorScheme="green" onClick={() => handleAddToCart(producto)}>
-      Agregar al Carrito
-    </Button>
-  )}
-</CardFooter>
+              {mostrarBotonAgregar && (
+                <Button  colorScheme="green" bgColor="#FF5733" onClick={() => handleAddToCart(producto)}>
+                  Pedir
+                </Button>
+              )}
+            </CardFooter>
           </Card>
         </Box>
       ))}
