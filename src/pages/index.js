@@ -78,12 +78,22 @@ export default function Home() {
   return (
 
 
-    <Chakra.Flex height="100vh" alignItems="center" justifyContent="center"  bgColor="white"  bgImage="Nombre.jpg" bgSize="initial"  bgRepeat="no-repeat" bgPos="top">
+    <Chakra.Flex height="100vh" alignItems="center" justifyContent="center" >
       
 
 
   
-     <Chakra.VStack marginTop="28" spacing={4} align="center" justifyContent="center">
+     <Chakra.VStack  spacing={4} align="center" justifyContent="center" >
+     <Chakra.Box display="flex" justifyContent="center" mb="30">
+  <Chakra.Image
+    width="50%"
+    height="auto" 
+    maxW="50%" 
+    src="Nombre.jpg"
+    alt="Imagen del sándwich"
+  />
+</Chakra.Box>
+
         <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">•Sanguches de Bondiola• Los verdaderos 🔥🔥 📍 SAN RAFAEL - MENDOZA</Chakra.Text>
         <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">Para llevar🏍️</Chakra.Text>
         <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">A domicilio🏁</Chakra.Text>
@@ -98,7 +108,7 @@ export default function Home() {
             </span>
           </Chakra.VStack>
         </Chakra.Button>
-        <Chakra.Box display="flex" justifyContent="center" marginTop="18">
+        <Chakra.Box display="flex" justifyContent="center" marginTop="15">
   <Chakra.Image
     width="50%"
     height="auto" 
