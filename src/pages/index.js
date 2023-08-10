@@ -75,6 +75,10 @@ export default function Home() {
 
   return (
     <Chakra.Flex
+    style={{
+      background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
+ 
+    }}
       minHeight="100vh"
       alignItems="center"
       justifyContent="center"
@@ -92,7 +96,7 @@ export default function Home() {
         />
       </Chakra.Box>
   
-      <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4} bgColor="#000000">
+      <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4}    >
         <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" marginBottom={2}>
           •Sanguches de Bondiola• Los verdaderos 🔥🔥
         </Chakra.Text>
