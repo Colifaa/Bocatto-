@@ -8,7 +8,7 @@ function Footer() {
   return (
     <Chakra.Box py={4}>
       <Chakra.Container maxW="container.lg">
-        <Chakra.SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={2}>
+        <Chakra.SimpleGrid columns={{ base: 1, sm: 2, md: 3, xl: 3 }} spacing={8}>
           <Chakra.VStack align="flex-start">
             <Chakra.Text fontSize="md" color="#FF5733" fontWeight="bold">
               Contáctanos
@@ -20,7 +20,7 @@ function Footer() {
               Teléfono: +123 456 789
             </Chakra.Text>
           </Chakra.VStack>
-          
+
           <Chakra.VStack align="flex-start">
             <Chakra.Text fontSize="md" color="#FF5733" fontWeight="bold">
               Horario de Atención
@@ -29,8 +29,8 @@ function Footer() {
               Sábados - Domingos: 11:00 AM - 6:00 PM
             </Chakra.Text>
           </Chakra.VStack>
-          
-          <Chakra.VStack align="flex-start" alignItems="center">
+
+          <Chakra.VStack align="center">
             <Chakra.HStack spacing={2}>
               <Chakra.IconButton
                 icon={<Chakra.Icon as={FaFacebook} boxSize={4} />}
@@ -57,5 +57,6 @@ function Footer() {
     </Chakra.Box>
   );
 }
+
 
 export default Footer;
