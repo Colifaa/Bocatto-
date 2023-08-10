@@ -77,7 +77,7 @@ export default function Home() {
     <Chakra.Flex
     style={{
       background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
- 
+
     }}
       minHeight="100vh"
       alignItems="center"
@@ -86,33 +86,43 @@ export default function Home() {
       bgColor="black"
       bgRepeat="no-repeat"
     >
-      <Chakra.Box display="flex" justifyContent="center" mb="4">
+  
+      <Chakra.Box display="flex" justifyContent="center" mb="4" >
         <Chakra.Image
           width={['90%', '70%', '50%']}
           height="auto"
           maxW="100%"
           src="Nombre.png"
-          bgColor="black"
         />
       </Chakra.Box>
   
-      <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4}    >
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" marginBottom={2}>
-          •Sanguches de Bondiola• Los verdaderos 🔥🔥
-        </Chakra.Text>
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
-          📍 SAN RAFAEL - MENDOZA
-        </Chakra.Text>
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
-          Para llevar 🏍️
-        </Chakra.Text>
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
-          A domicilio 🏁
-        </Chakra.Text>
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
-          Buenos Aires 60, M5600 FZB, Mendoza, Argentina
-        </Chakra.Text>
-        <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" bgColor="#000000" onClick={handleOpenModal}>
+      <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4}>
+      <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic" marginBottom={2}>
+  🔥Sanguches de carne braseada🔥
+</Chakra.Text>
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
+  📍 SAN RAFAEL - MENDOZA
+</Chakra.Text>
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
+  Para llevar 🏍️
+</Chakra.Text>
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
+  A domicilio 🏁
+</Chakra.Text>
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
+  Buenos Aires 60, M5600 FZB, Mendoza, Argentina
+</Chakra.Text>
+        <Chakra.Button
+          fontSize={['xl', '2xl', '3xl']}
+          colorScheme="teal"
+          bgColor="#FF5733" // Cambiado a color de fondo
+          color="black" // Cambiado el color de texto
+          onClick={handleOpenModal}
+          _hover={{
+            bgColor: "#FF5733", // Cambio de color en hover
+            color: "black", // Cambio de color de texto en hover
+          }}
+        >
           Realizar Pedido
           <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%">
             <span role="img" aria-label="lomito" style={{ color: "#FF5733" }}>
