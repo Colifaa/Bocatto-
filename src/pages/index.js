@@ -73,30 +73,41 @@ export default function Home() {
 
 
 
-
   return (
     <Chakra.Flex
-      height="100vh"
+      minHeight="100vh"
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
-      bgColor="white"
+      bgColor="black"
+      bgRepeat="no-repeat"
     >
       <Chakra.Box display="flex" justifyContent="center" mb="4">
         <Chakra.Image
-          width={['80%', '60%', '50%']}
+          width={['90%', '70%', '50%']}
           height="auto"
           maxW="100%"
-          src="Nombre.jpg"
-          alt="Imagen del sándwich"
+          src="Nombre.png"
+          bgColor="black"
         />
       </Chakra.Box>
-
-      <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%">
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">•Sanguches de Bondiola• Los verdaderos 🔥🔥 📍 SAN RAFAEL - MENDOZA</Chakra.Text>
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">Para llevar🏍️</Chakra.Text>
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">A domicilio🏁</Chakra.Text>
-        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">Buenos Aires 60, M5600 FZB, Mendoza, Argentina</Chakra.Text>
+  
+      <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4} bgColor="#000000">
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" marginBottom={2}>
+          •Sanguches de Bondiola• Los verdaderos 🔥🔥
+        </Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
+          📍 SAN RAFAEL - MENDOZA
+        </Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
+          Para llevar 🏍️
+        </Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
+          A domicilio 🏁
+        </Chakra.Text>
+        <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733">
+          Buenos Aires 60, M5600 FZB, Mendoza, Argentina
+        </Chakra.Text>
         <Chakra.Button fontSize={['xl', '2xl', '3xl']} colorScheme="teal" bgColor="#000000" onClick={handleOpenModal}>
           Realizar Pedido
           <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%">
@@ -105,18 +116,18 @@ export default function Home() {
             </span>
           </Chakra.VStack>
         </Chakra.Button>
-
+  
         <Chakra.Box display="flex" justifyContent="center" width="100%">
           <Chakra.Image
-            width={['80%', '60%', '50%']}
+            width={['90%', '70%', '50%']}
             height="auto"
             maxW="100%"
-            src="Sanguche.jpg"
+            src="Sanguche.png"
             alt="Imagen del sándwich"
           />
         </Chakra.Box>
       </Chakra.VStack>
-
+  
       <Chakra.Modal size="full" isOpen={isOpen} onClose={handleCloseModal}>
         <Chakra.ModalOverlay />
         <Chakra.ModalContent bgColor="#FF5733" color="#FFFFFF">
@@ -128,26 +139,27 @@ export default function Home() {
           </Chakra.ModalBody>
           {/* Aquí puedes agregar cualquier otro contenido o botones que desees mostrar en el pie del modal */}
           <Chakra.Box mt={4} textAlign="center">
-            {/* Botón "Buy now" dentro del modal */}
             <Chakra.Alert
-  position="absolute"
-  bottom="45px"
-  status="warning"
-  variant='subtle'
-  flexDirection='column'
-  alignItems='center'
-  justifyContent='center'
-  textAlign='center'
-  height='200px'
-  left="50%" // Centra horizontalmente el alert
-  transform="translateX(-50%)" // Ajusta el centro horizontal
-  width={['80%', '60%', '50%']} // Ancho responsivo
-  display={isAlertOpen ? 'block' : 'none'}
-  onClose={() => setAlertOpen(false)}
->
-<Chakra.AlertIcon boxSize="40px" display="flex" justifyContent="center" alignItems="center" margin="auto" />
-<Chakra.AlertTitle mt={4} mb={1} fontSize={['md', 'lg', 'lg']} color="red.600">
-                Debes agregar productos  para realizar la compra.
+              borderRadius="xl"
+              position="absolute"
+              bottom="45px"
+              status="warning"
+              variant='subtle'
+              flexDirection='column'
+              alignItems='center'
+              justifyContent='center'
+              textAlign='center'
+              height='180px'
+              left="50%" // Centra horizontalmente el alert
+              we
+              transform="translateX(-50%)" // Ajusta el centro horizontal
+              width={['80%', '60%', '50%']} // Ancho responsivo
+              display={isAlertOpen ? 'block' : 'none'}
+              onClose={() => setAlertOpen(false)}
+            >
+              <Chakra.AlertIcon boxSize="40px" display="flex" justifyContent="center" alignItems="center" margin="auto" />
+              <Chakra.AlertTitle mt={4} mb={1} fontSize={['md', 'lg', 'lg']} color="red.600">
+                Debes agregar productos para realizar la compra.
               </Chakra.AlertTitle>
               <Chakra.AlertDescription maxWidth={['60%', '80%', '80%']}>
                 <Chakra.Button
@@ -161,28 +173,25 @@ export default function Home() {
               </Chakra.AlertDescription>
             </Chakra.Alert>
             <Chakra.Button
-  position="relative"
-  bottom="0" // Fija el botón en la parte inferior del contenedor
-  variant='solid'
-  colorScheme='blue'
-  bgColor="#000000"
-  onClick={handleOpenForm}
-  disabled={cart.length === 0}
->
+              position="relative"
+              bottom="0" // Fija el botón en la parte inferior del contenedor
+              variant='solid'
+              colorScheme='blue'
+              bgColor="#000000"
+              onClick={handleOpenForm}
+              disabled={cart.length === 0}
+            >
               Buy now
             </Chakra.Button>
           </Chakra.Box>
         </Chakra.ModalContent>
       </Chakra.Modal>
       <FormularioRealizarPedido isOpen={isFormOpen} onClose={handleCloseForm} cart={cart} />
-
+  
       <Chakra.Box mt="-5" mb="-5">
         <Footer />
-
       </Chakra.Box>
-
+  
     </Chakra.Flex>
-
-
   );
 }
