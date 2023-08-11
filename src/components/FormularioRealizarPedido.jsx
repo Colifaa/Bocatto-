@@ -50,9 +50,14 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
  
 
   return (
-<Modal isOpen={isOpen} onClose={onClose} size="full">
-  <ModalOverlay />
-  <ModalContent color="blackAlpha.800" alignItems="center">
+<Modal isOpen={isOpen} onClose={onClose} size="full" >
+  <ModalOverlay  />
+  <ModalContent style={{
+    background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
+
+    borderStyle: "solid",
+   
+  }} alignItems="center">
     <ModalHeader fontSize={['xl', '2xl', '3xl']}>
       <Box>
         <VStack spacing={4} align="center">
@@ -63,7 +68,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   textAlign="center"
                   fontWeight="bold"
                   fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
+                  color="black"
                   pb={2}
                   textShadow="1px 1px 2px teal.300"
                   borderBottom="2px solid teal.400"
@@ -80,7 +85,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                   size={['xs', 'md', 'lg']}
-                  bg="teal.100"
+                  bg="teal.200"
                   borderRadius="xl"
                   _focus={{ outline: 'none', bg: 'white' }}
                 />
@@ -88,7 +93,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                 <FormHelperText textAlign="center"
              fontWeight="bold"
              fontSize={['md', 'lg', 'xl']}
-             color="black.500"
+             color="black"
              pb={2}
              textShadow="1px 1px 2px teal.300"
              borderBottom="2px solid teal.400"
@@ -100,7 +105,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                 <FormLabel textAlign="center"
                   fontWeight="bold"
                   fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
+                  color="black"
                   pb={2}
                   textShadow="1px 1px 2px teal.300"
                   borderBottom="2px solid teal.400"
@@ -114,37 +119,37 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
                   value={domicilio}
                   onChange={(e) => setDomicilio(e.target.value)}
                   size={['xs', 'md', 'lg']}
-                  bg="teal.100"
+                  bg="teal.200"
                   borderRadius="xl"
                   _focus={{ outline: 'none', bg: 'white' }}
                 />
                 <FormHelperText textAlign="center"
                   fontWeight="bold"
-                  fontSize={['md', 'lg', 'xl']}
-                  color="black.500"
+                  fontSize={["sm",'md', 'lg', 'xl' , "2x1"]}
+                  color="black"
                   pb={2}
                   textShadow="1px 1px 2px teal.300"
                   borderBottom="2px solid teal.400"
                   transition="all 0.2s ease-in-out"
-                >Indicar Domicilio.</FormHelperText>
+                >Domicilio y Nro.</FormHelperText>
               </FormControl>
             </Flex>
 
             <FormControl mt="4">
               <FormLabel textAlign="center"
                 fontWeight="bold"
-                fontSize={['md', 'lg', 'xl']}
-                color="black.500"
+                fontSize={["sm",'md', 'lg', 'xl' , "2x1"]}
+                color="black"
                 pb={2}
                 textShadow="1px 1px 2px teal.300"
-                borderBottom="2px solid teal.400"
+                borderBottom="2px solid teal.200"
                 transition="all 0.2s ease-in-out"
                 _hover={{ cursor: 'pointer', borderBottomColor: 'teal.500', textShadow: 'none', transform: 'scale(1.1)' }}
                 _focus={{ outline: 'none', borderBottomColor: 'teal.500', textShadow: 'none' }} >Servicio:</FormLabel>
               <Select
-                fontSize='15px'
-                size="sm"
-                color="red.500"
+              
+                fontSize={[ 'lg', 'xl' , "2x1"]}
+                color="black"
                 fontWeight="bold"
                 borderRadius="md"
                 _focus={{
@@ -164,7 +169,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
               <FormHelperText textAlign="center"
                 fontWeight="bold"
                 fontSize={['md', 'lg', 'xl']}
-                color="black.500"
+                color="black"
                 pb={2}
                 textShadow="1px 1px 2px teal.300"
                 borderBottom="2px solid teal.400"
@@ -177,7 +182,11 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
             </Flex>
 
             <HStack justifyContent="center">
-              <Button type="submit" mt={4} colorScheme="teal">
+              <Button type="submit" mt={4}    position="relative"
+              bottom="0" // Fija el botón en la parte inferior del contenedor
+              variant='solid'
+              colorScheme='green'
+              bgColor="#000000">
                 Enviar Pedido
               </Button>
             </HStack>
@@ -185,15 +194,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
         </VStack>
       </Box>
     </ModalHeader>
-    <ModalCloseButton />
-
-    <ModalBody>
-
-    </ModalBody>
-
-    <ModalFooter justifyContent="center" bg="gray.100">
-
-    </ModalFooter>
+    <ModalCloseButton bgColor="orange.500" color="blue" />
   </ModalContent>
 </Modal>
   );

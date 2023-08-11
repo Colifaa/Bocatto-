@@ -35,7 +35,7 @@ const Carrito = ({ compras, onComprar, onEliminarProducto, cart }) => {
             <Chakra.Text fontSize="xx-large" color="#FF5733" fontWeight="bold" bgColor="rgba(0, 0, 0, 0.86)">
               Precio Total: ${producto.precio * producto.cantidad}
             </Chakra.Text>
-            <Chakra.Button onClick={() => handleEliminarProducto(producto.id)} mt={2} bgColor="#FF5733" color="#FFFFFF">
+            <Chakra.Button onClick={() => handleEliminarProducto(producto.id)} mt={2} bgColor="#FF5733" color="#FFFFFF"   colorScheme='red'>
               Eliminar
             </Chakra.Button>
           </Chakra.Box>

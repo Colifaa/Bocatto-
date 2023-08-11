@@ -116,15 +116,13 @@ export default function Home() {
 LUGONES 1906 (ESQUINA BRAÑA)
 </Chakra.Text>
         <Chakra.Button
-          fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']}
-          colorScheme="teal"
+          fontSize={[ 'sm', 'md', 'lg', 'xl', '2xl']}
+       
           bgColor="#FF5733" // Cambiado a color de fondo
           color="black" // Cambiado el color de texto
           onClick={handleOpenModal}
-          _hover={{
-            bgColor: "#FF5733", // Cambio de color en hover
-            color: "black", // Cambio de color de texto en hover
-          }}
+          colorScheme='green'
+       
         >
           Realizar Pedido
           <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%">
@@ -200,12 +198,12 @@ LUGONES 1906 (ESQUINA BRAÑA)
               position="relative"
               bottom="0" // Fija el botón en la parte inferior del contenedor
               variant='solid'
-              colorScheme='blue'
+              colorScheme='green'
               bgColor="#000000"
               onClick={handleOpenForm}
               disabled={cart.length === 0}
             >
-              Buy now
+              Comprar Ahora
             </Chakra.Button>
           </Chakra.Box>
         </Chakra.ModalContent>
