@@ -11,7 +11,7 @@ function Footer() {
 
     borderStyle: "solid",
    
-  }} width="100vw">
+  }} width="100vh">
   
   <Chakra.Container maxW="container.lg">
     <Chakra.SimpleGrid columns={{ base: 1, sm: 2, md: 2, xl: 3 }} spacing={1}>
