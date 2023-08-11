@@ -77,15 +77,14 @@ export default function Home() {
     <Chakra.Flex
     style={{
       background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
-      flexDirection: "column", // Cambio de dirección de flexión a columna
-      minHeight: "100vh",
+      overflowX: "hidden", // Usa camelCase aquí
     }}
+      minHeight="100vh"
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
       bgColor="black"
       bgRepeat="no-repeat"
-      
     >
   
       <Chakra.Box display="flex" justifyContent="center" mb="4" >
@@ -111,7 +110,7 @@ export default function Home() {
   DELIVERY 🏁
 </Chakra.Text>
 <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
-LUGONES 1906 (ESQUINA BRAÑA)
+LUGONES 1906 ESQUINA BRAÑA
 </Chakra.Text>
         <Chakra.Button
           fontSize={['xl', '2xl', '3xl']}
