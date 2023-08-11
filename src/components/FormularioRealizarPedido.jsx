@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, FormHelperText, VStack, Select, HStack, Button, IconButton, Box, Flex
+  Modal, Alert, ModalOverlay, AlertTitle,AlertDescription , AlertIcon, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, FormHelperText, VStack, Select, HStack, Button, IconButton, Box, Flex
 } from '@chakra-ui/react';
 import Cards from '../components/Cards';
 import { supabase, storage } from '../lib/supabase'; // Asegúrate de que la ruta sea correcta
@@ -11,7 +11,7 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
   const [TipoServicio, setTipoServicio] = useState('Retirar');
   const [productosDisponiblesFormulario, setProductosDisponiblesFormulario] = useState([]);
 
-
+  const [showAlert, setShowAlert] = useState(false); // Estado para mostrar u ocultar el Alert
 
   useEffect(() => {
     async function fetchProductosDisponibles() {
@@ -31,7 +31,8 @@ const enviarPedido = (e) => {
 
   // Verifica si los campos obligatorios están completos
   if (!nombre || !domicilio) {
-    alert('Por favor completa todos los campos obligatorios.');
+    // Mostrar el Alert
+    setShowAlert(true);
     return;
   }
 
@@ -202,6 +203,30 @@ const enviarPedido = (e) => {
       </Box>
     </ModalHeader>
     <ModalCloseButton bgColor="orange.500" color="blue" />
+    {showAlert && (
+  <Alert status="error" borderRadius="md" textAlign="center" fontSize={['sm', 'md', 'lg']} boxSize={["xs"]}borderEndRadius="xl">
+    <VStack spacing={2} alignItems="center">
+      <AlertIcon
+        boxSize="40px"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        margin="auto"
+      />
+      <AlertTitle color="red.600">Debes llenar los campos para realizar la compra.</AlertTitle>
+      <AlertDescription>
+        <Button
+          variant="solid"
+          colorScheme="teal"
+          onClick={() => setShowAlert(false)} // Cerrar el alert cuando se haga clic en el botón
+        >
+          Cerrar
+        </Button>
+      </AlertDescription>
+    </VStack>
+  </Alert>
+)}
+
   </ModalContent>
 </Modal>
   );
