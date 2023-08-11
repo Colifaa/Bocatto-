@@ -85,6 +85,7 @@ export default function Home() {
       flexDirection="column"
       bgColor="black"
       bgRepeat="no-repeat"
+      left="0"
     >
   
       <Chakra.Box display="flex" justifyContent="center" mb="4" >
