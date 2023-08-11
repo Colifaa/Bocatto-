@@ -16,22 +16,22 @@ function Footer() {
   <Chakra.Container maxW="container.lg">
     <Chakra.SimpleGrid columns={{ base: 1, sm: 2, md: 2, xl: 3 }} spacing={1}>
       <Chakra.VStack align="flex-start">
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733" fontWeight="bold">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontWeight="bold">
           Contáctanos
         </Chakra.Text>
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733">
-          Buenos Aires 60, M5600 FZB, Mendoza, Argentina
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black">
+         San Rafael Mendoza, Argentina
         </Chakra.Text>
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733">
-          Teléfono: +123 456 789
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black">
+          Teléfono: 2604110289
         </Chakra.Text>
       </Chakra.VStack>
 
       <Chakra.VStack align="flex-start">
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733" fontWeight="bold">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontWeight="bold">
           Horario de Atención
         </Chakra.Text>
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black">
           Sábados - Domingos: 11:00 AM - 6:00 PM
         </Chakra.Text>
       </Chakra.VStack>
@@ -42,19 +42,19 @@ function Footer() {
             icon={<Chakra.Icon as={FaFacebook} boxSize={4} />}
             aria-label="Facebook"
             variant="ghost"
-            color="#FF5733"
+            color="Black"
           />
           <Chakra.IconButton
             icon={<Chakra.Icon as={FaTwitter} boxSize={4} />}
             aria-label="Twitter"
             variant="ghost"
-            color="#FF5733"
+            color="Black"
           />
           <Chakra.IconButton
             icon={<Chakra.Icon as={FaInstagram} boxSize={4} />}
             aria-label="Instagram"
             variant="ghost"
-            color="#FF5733"
+            color="Black"
           />
                   <Chakra.Image  
   src="Bocattos2.png"
@@ -62,6 +62,7 @@ function Footer() {
   height="auto" // Mantiene la proporción de la imagen
   mx="auto" // Centra horizontalmente la imagen
   ml="auto" // Desplaza la imagen hacia la derecha
+  
 />
             </Chakra.HStack>
           </Chakra.VStack>
