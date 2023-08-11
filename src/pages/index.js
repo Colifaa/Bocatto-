@@ -98,19 +98,19 @@ export default function Home() {
   
       <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4}>
       <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive" marginBottom={2}>
-  🔥Sanguches de carne braseada🔥
+  🔥SANDWICHES DE CARNE BRASEADA🔥
 </Chakra.Text>
 <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold" fontFamily="cursive">
   SAN RAFAEL - MENDOZA 📌
 </Chakra.Text>
 <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
-  Para llevar 🏍️
+  TAKE AWAY 🏍️
 </Chakra.Text>
 <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
-  A domicilio 🏁
+  DELIVERY 🏁
 </Chakra.Text>
 <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
- Lugones
+LUGONES 1906 (ESQUINA BRAÑA)
 </Chakra.Text>
         <Chakra.Button
           fontSize={['xl', '2xl', '3xl']}
