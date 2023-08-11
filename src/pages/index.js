@@ -90,7 +90,7 @@ export default function Home() {
  
       <Chakra.Box display="flex" justifyContent="center" mb="2" >
         <Chakra.Image
-          width={['90%', '70%', '50%']}
+            width={['100%', '90%', '80%', '70%', '60%', '50%', '40%', '30%', '20%', '10%']}
           height="auto"
           maxW="100%"
           src="Nombre.png"
@@ -136,7 +136,7 @@ LUGONES 1906 (ESQUINA BRAÑA)
   
         <Chakra.Box display="flex" justifyContent="center" width="100%" mt="-2">
           <Chakra.Image
-            width={['90%', '70%', '50%']}
+      width={['100%', '90%', '80%', '70%', '60%', '50%', '40%', '30%', '20%', '10%']}
             height="auto"
             maxW="100%"
             src="Sanguche.png"
