@@ -147,9 +147,16 @@ LUGONES 1906 (ESQUINA BRAÑA)
   
       <Chakra.Modal size="full" isOpen={isOpen} onClose={handleCloseModal}>
         <Chakra.ModalOverlay />
-        <Chakra.ModalContent bgColor="#FF5733" color="#FFFFFF">
+        <Chakra.ModalContent  style={{
+    background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
+
+    borderStyle: "solid",
+   
+  }}>
           <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
-          <Chakra.ModalCloseButton />
+        
+          <Chakra.ModalCloseButton color="Blue" bgColor="orange.400"/>
+         
           <Chakra.ModalBody>
             {isCardsOpen && <Cards productos={productos} mostrarBotonAgregar={true} cart={cart} setCart={setCart} />}
             <Carrito cart={cart} onEliminarProducto={handleEliminarProducto} />

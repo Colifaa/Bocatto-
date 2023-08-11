@@ -35,7 +35,7 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
     }
   };
   return (
-    <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={4} justifyContent="center">
+    <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} gap={4} justifyContent="center" >
       {productos?.map((producto, index) => (
         <Box key={index} display="flex" flexDirection="column" alignItems="center">
           <Card maxW="300px" mx="auto" bgColor="#000000" color="#FFFFFF" alignItems="center">
@@ -49,8 +49,8 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
                 boxSize="250px"
               />
               <Stack spacing={2} textAlign="center" p={4}>
-                <Heading size="md">{producto.nombre}</Heading>
-                <Text>{producto.salsas}</Text>
+                <Heading size="md" color="#A7414C ">{producto.nombre}</Heading>
+                <Text  fontSize={['xs', 'sm', 'md', 'lg', 'xl']}  fontWeight="light"  fontFamily="Georgia">{producto.salsas}</Text>
                 <Text color='#FF5733' fontSize='xl'>${producto.precio}</Text>
               </Stack>
             </CardBody>
@@ -64,7 +64,7 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
               )}
               {mostrarBotonAgregar && (
                 <Button colorScheme="green" bgColor="#FF5733" onClick={() => handleAddToCart(producto)}>
-                  Pedir
+                  Agregar Pedido
                 </Button>
               )}
             </CardFooter>
