@@ -26,28 +26,35 @@ export default function FormularioRealizarPedido({ isOpen, onClose, onEnviarPedi
     fetchProductosDisponibles();
   }, []);
 
-  const enviarPedido = () => {
-    const productosSeleccionados = [];
+const enviarPedido = (e) => {
+  e.preventDefault(); // Detener la recarga de la página
 
-    cart.forEach((producto) => {
-      const subtotalProducto = producto.precio * producto.cantidad;
-      productosSeleccionados.push(`- x${producto.cantidad} ${producto.nombre} $${subtotalProducto}`);
-    });
+  // Verifica si los campos obligatorios están completos
+  if (!nombre || !domicilio) {
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
+  }
 
-    const costoTotal = cart.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
-    const costoEnvio = TipoServicio === "A domicilio" ? 300 : 0;
+  const productosSeleccionados = [];
 
-    const mensajeProductos = productosSeleccionados.join("\n");
-    const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nDomicilio: ${domicilio} \n\n 💲 Costos:\n\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal + costoEnvio},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
+  cart.forEach((producto) => {
+    const subtotalProducto = producto.precio * producto.cantidad;
+    productosSeleccionados.push(`- x${producto.cantidad} ${producto.nombre} $${subtotalProducto}`);
+  });
 
-    const mensajeCodificado = encodeURIComponent(mensajePedido);
+  const costoTotal = cart.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
+  const costoEnvio = TipoServicio === "A domicilio" ? 300 : 0;
 
-    const numeroDestino = '+542604224940'; // Cambiar por el número de WhatsApp correcto
-    const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
+  const mensajeProductos = productosSeleccionados.join("\n");
+  const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nDomicilio: ${domicilio}\n\n💲 Costos:\n\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal + costoEnvio},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
 
-    window.open(enlaceWhatsApp, '_blank');
-  };
- 
+  const mensajeCodificado = encodeURIComponent(mensajePedido);
+
+  const numeroDestino = '+542604110289'; // Cambiar por el número de WhatsApp correcto
+  const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
+
+  window.open(enlaceWhatsApp, '_blank');
+};
 
   return (
 <Modal isOpen={isOpen} onClose={onClose} size="full" >
