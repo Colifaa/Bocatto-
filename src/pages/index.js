@@ -97,20 +97,20 @@ export default function Home() {
       </Chakra.Box>
   
       <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4}>
-      <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic" marginBottom={2}>
+      <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic" fontFamily="cursive" marginBottom={2}>
   🔥Sanguches de carne braseada🔥
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
-  📍 SAN RAFAEL - MENDOZA
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontFamily="cursive">
+  SAN RAFAEL - MENDOZA 📌
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold"  fontFamily="cursive">
   Para llevar 🏍️
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold"  fontFamily="cursive">
   A domicilio 🏁
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic">
-  Buenos Aires 60, M5600 FZB, Mendoza, Argentina
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold"  fontFamily="cursive">
+ Lugones
 </Chakra.Text>
         <Chakra.Button
           fontSize={['xl', '2xl', '3xl']}
