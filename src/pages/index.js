@@ -77,7 +77,7 @@ export default function Home() {
     <Chakra.Flex
     style={{
       background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
-
+      left:"0"
     }}
       minHeight="100vh"
       alignItems="center"
@@ -85,7 +85,7 @@ export default function Home() {
       flexDirection="column"
       bgColor="black"
       bgRepeat="no-repeat"
-      left="0"
+      
     >
   
       <Chakra.Box display="flex" justifyContent="center" mb="4" >
