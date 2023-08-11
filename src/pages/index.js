@@ -87,7 +87,7 @@ export default function Home() {
       bgRepeat="no-repeat"
     >
       
-   <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4} >
+ 
       <Chakra.Box display="flex" justifyContent="center" mb="8" >
         <Chakra.Image
           width={['90%', '70%', '50%']}
@@ -96,7 +96,8 @@ export default function Home() {
           src="Nombre.png"
         />
       </Chakra.Box>
-  
+      
+      <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4} >
      
       <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive" marginBottom={2}>
   🔥SANDWICHES DE CARNE BRASEADA🔥
