@@ -97,19 +97,19 @@ export default function Home() {
       </Chakra.Box>
   
       <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4}>
-      <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontStyle="italic" fontFamily="cursive" marginBottom={2}>
+      <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive" marginBottom={2}>
   🔥Sanguches de carne braseada🔥
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold" fontFamily="cursive">
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold" fontFamily="cursive">
   SAN RAFAEL - MENDOZA 📌
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold"  fontFamily="cursive">
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
   Para llevar 🏍️
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold"  fontFamily="cursive">
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
   A domicilio 🏁
 </Chakra.Text>
-<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="#FF5733" fontWeight="bold"  fontFamily="cursive">
+<Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
  Lugones
 </Chakra.Text>
         <Chakra.Button
