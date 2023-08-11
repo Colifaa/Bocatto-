@@ -19,7 +19,7 @@ const Carrito = ({ compras, onComprar, onEliminarProducto, cart }) => {
       
   return (
     <Chakra.Box>
-      <Chakra.Text  fontSize="xxx-large"  mb={4} textAlign="center" marginTop={20} textDecoration="inline-block" fontStyle="oblique"  color="black" fontWeight="extrabold"  fontFamily="Georgia">
+      <Chakra.Text  fontSize="xxx-large"  mb={4} textAlign="center" marginTop={20} textDecoration="inline-block" fontStyle="oblique"  color="teal.700" fontWeight="extrabold"  fontFamily="Georgia">
         Pedido:
       </Chakra.Text>
       <Chakra.SimpleGrid minChildWidth='120px' spacing='40px' bgGradient="linear(to #A7414A, #A7414A, #A7414A)" templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={2} justifyContent="center">

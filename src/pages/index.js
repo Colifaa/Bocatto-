@@ -99,20 +99,20 @@ export default function Home() {
       
       <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4} mt="-1">
      
-      <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold" fontFamily="Georgia">
+      <Chakra.Text fontSize={[ 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold" fontFamily="Georgia">
   🔥SANDWICHES DE CARNE BRASEADA🔥
 </Chakra.Text>
 
-<Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']}color="black" fontWeight="extrabold" fontFamily="Georgia">
+<Chakra.Text fontSize={[ 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']}color="black" fontWeight="extrabold" fontFamily="Georgia">
   SAN RAFAEL - MENDOZA 📌
 </Chakra.Text>
-<Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold"  fontFamily="Georgia">
+<Chakra.Text fontSize={['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold"  fontFamily="Georgia">
   TAKE AWAY 🏍️
 </Chakra.Text>
-<Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold"  fontFamily="Georgia">
+<Chakra.Text fontSize={[ 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold"  fontFamily="Georgia">
   DELIVERY 🏁
 </Chakra.Text>
-<Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold"  fontFamily="Georgia">
+<Chakra.Text fontSize={[ 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="black" fontWeight="extrabold"  fontFamily="Georgia">
 LUGONES 1906 (ESQUINA BRAÑA)
 </Chakra.Text>
         <Chakra.Button
@@ -151,7 +151,9 @@ LUGONES 1906 (ESQUINA BRAÑA)
     borderStyle: "solid",
    
   }}>
-          <Chakra.ModalHeader>Realizar Pedido</Chakra.ModalHeader>
+          <Chakra.ModalHeader fontSize={['xl', '2xl', '3xl']} fontWeight="bold" color="teal.600">
+  Realizar Pedido
+</Chakra.ModalHeader>
         
           <Chakra.ModalCloseButton color="Blue" bgColor="orange.400"/>
          

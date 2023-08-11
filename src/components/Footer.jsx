@@ -16,22 +16,22 @@ function Footer() {
   <Chakra.Container maxW="container.lg">
     <Chakra.SimpleGrid columns={{ base: 1, sm: 2, md: 2, xl: 3 }} spacing={1}>
       <Chakra.VStack align="flex-start">
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontWeight="bold" fontFamily="Georgia">
+        <Chakra.Text fontSize={[  'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontWeight="bold" fontFamily="Georgia">
           Contáctanos
         </Chakra.Text>
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontFamily="Georgia">
+        <Chakra.Text fontSize={[  'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontFamily="Georgia">
          San Rafael Mendoza, Argentina
         </Chakra.Text>
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontFamily="Georgia"> 
+        <Chakra.Text fontSize={[  'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontFamily="Georgia"> 
           Teléfono: 2604110289
         </Chakra.Text>
       </Chakra.VStack>
 
       <Chakra.VStack align="flex-start">
-        <Chakra.Text  fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontWeight="bold" fontFamily="Georgia">
+        <Chakra.Text  fontSize={[  'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontWeight="bold" fontFamily="Georgia">
           Horario de Atención
         </Chakra.Text>
-        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontFamily="Georgia">
+        <Chakra.Text fontSize={[  'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="Black" fontFamily="Georgia">
           Viernes - Sábados: 19:00 PM - 23:00 PM 
         </Chakra.Text>
       </Chakra.VStack>
