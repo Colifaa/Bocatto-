@@ -6,12 +6,15 @@ import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
-<Chakra.Box py={4}  style={{
-    background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
-
-    borderStyle: "solid",
-   
-  }} width="auto">
+<Chakra.Box py={4} style={{
+  position: "absolute",
+  bottom: "0",
+  left: "0",
+  width: "100%",
+  background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
+  borderStyle: "solid",
+  py: 4, // Padding vertical
+}} width="100vw">
   
   <Chakra.Container maxW="container.lg">
     <Chakra.SimpleGrid columns={{ base: 1, sm: 2, md: 2, xl: 3 }} spacing={1}>
