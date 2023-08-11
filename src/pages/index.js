@@ -88,7 +88,7 @@ export default function Home() {
     >
       
    <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4} >
-      <Chakra.Box display="flex" justifyContent="center" mb="10" mt="0">
+      <Chakra.Box display="flex" justifyContent="center" mb="8" >
         <Chakra.Image
           width={['90%', '70%', '50%']}
           height="auto"
