@@ -9,7 +9,7 @@ const FormularioInicioSesion = ({ isOpen, onClose, onLoginSuccess, onLogout }) =
   const handleLogin = () => {
     // Aquí debes implementar la lógica para verificar las credenciales del administrador
     // Por ejemplo, puedes hacer una solicitud a tu servidor para validar las credenciales
-    if (nombreUsuario === 'admin' && contrasena === 'admin123') {
+    if (nombreUsuario === 'Bruno' && contrasena === 'Panzas123') {
       alert('Inicio de sesión exitoso');
       setIsLoggedIn(true); // Establece el estado de inicio de sesión a verdadero
       onLoginSuccess(); // Invoca la función para indicar que el inicio de sesión fue exitoso
