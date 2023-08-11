@@ -79,7 +79,7 @@ export default function Home() {
       background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
 
     }}
-      minHeight="100vh"
+      minHeight="99.9vh"
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
