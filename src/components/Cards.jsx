@@ -35,10 +35,10 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
     }
   };
   return (
-    <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={2} justifyContent="center">
+    <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={4} justifyContent="center">
       {productos?.map((producto, index) => (
-        <Box key={index} display="flex" justifyContent="center" flexWrap="wrap" >
-          <Card maxW={{ base: "200px", md: "300px" }} mx="auto" bgColor="#000000" color="#FFFFFF" alignItems="center">
+        <Box key={index} display="flex" flexDirection="column" alignItems="center">
+          <Card maxW="300px" mx="auto" bgColor="#000000" color="#FFFFFF" alignItems="center">
             <CardBody>
               <Image
                 src={producto.imagen}
@@ -46,16 +46,12 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
                 borderRadius='lg'
                 border="4px"
                 borderColor="#FF5733"
-                boxSize={{ base: "150px", md: "250px" }}
+                boxSize="250px"
               />
-              <Stack>
-                <Heading mt="4" size="lg" >{producto.nombre}</Heading>
-                <Text>
-                  {producto.salsas}
-                </Text>
-                <Text color='#FF5733' fontSize='2xl'>
-                  ${producto.precio}
-                </Text>
+              <Stack spacing={2} textAlign="center" p={4}>
+                <Heading size="md">{producto.nombre}</Heading>
+                <Text>{producto.salsas}</Text>
+                <Text color='#FF5733' fontSize='xl'>${producto.precio}</Text>
               </Stack>
             </CardBody>
             <Divider borderColor="#FF5733" />
@@ -66,10 +62,8 @@ function Cards({ productos, handleDeleteProduct, handleEditProduct, mostrarBoton
                   <Button colorScheme="blue" onClick={() => handleEditProduct(index)}>Editar</Button>
                 </ButtonGroup>
               )}
-            </CardFooter>
-            <CardFooter>
               {mostrarBotonAgregar && (
-                <Button  colorScheme="green" bgColor="#FF5733" onClick={() => handleAddToCart(producto)}>
+                <Button colorScheme="green" bgColor="#FF5733" onClick={() => handleAddToCart(producto)}>
                   Pedir
                 </Button>
               )}
