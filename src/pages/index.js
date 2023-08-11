@@ -77,9 +77,9 @@ export default function Home() {
     <Chakra.Flex
     style={{
       background: "linear-gradient(to right, #1C1C1C, #A7414A, #1C1C1C)",
-      left:"0"
+      flexDirection: "column", // Cambio de dirección de flexión a columna
+      minHeight: "100vh",
     }}
-      minHeight="100vh"
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
