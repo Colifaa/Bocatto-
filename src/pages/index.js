@@ -99,7 +99,7 @@ export default function Home() {
       
       <Chakra.VStack spacing={4} align="center" justifyContent="center" width="100%" padding={4} mt="-1">
      
-      <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive" marginBottom={2}>
+      <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive" >
   🔥SANDWICHES DE CARNE BRASEADA🔥
 </Chakra.Text>
 <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold" fontFamily="cursive">
@@ -112,7 +112,7 @@ export default function Home() {
   DELIVERY 🏁
 </Chakra.Text>
 <Chakra.Text fontSize={['xl', '2xl', '3xl']} color="black" fontWeight="extrabold"  fontFamily="cursive">
-LUGONES 1906 ESQUINA BRAÑA
+LUGONES 1906 (ESQUINA BRAÑA)
 </Chakra.Text>
         <Chakra.Button
           fontSize={['xl', '2xl', '3xl']}
