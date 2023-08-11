@@ -16,22 +16,22 @@ function Footer() {
   <Chakra.Container maxW="container.lg">
     <Chakra.SimpleGrid columns={{ base: 1, sm: 2, md: 2, xl: 3 }} spacing={1}>
       <Chakra.VStack align="flex-start">
-        <Chakra.Text fontSize={['lg', 'xl', 'xl']} color="#FF5733" fontWeight="bold">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733" fontWeight="bold">
           Contáctanos
         </Chakra.Text>
-        <Chakra.Text fontSize={['md', 'lg', 'lg']} color="#FF5733">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733">
           Buenos Aires 60, M5600 FZB, Mendoza, Argentina
         </Chakra.Text>
-        <Chakra.Text fontSize={['md', 'lg', 'lg']} color="#FF5733">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733">
           Teléfono: +123 456 789
         </Chakra.Text>
       </Chakra.VStack>
 
       <Chakra.VStack align="flex-start">
-        <Chakra.Text fontSize={['lg', 'xl', 'xl']} color="#FF5733" fontWeight="bold">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733" fontWeight="bold">
           Horario de Atención
         </Chakra.Text>
-        <Chakra.Text fontSize={['md', 'lg', 'lg']} color="#FF5733">
+        <Chakra.Text fontSize={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} color="#FF5733">
           Sábados - Domingos: 11:00 AM - 6:00 PM
         </Chakra.Text>
       </Chakra.VStack>
