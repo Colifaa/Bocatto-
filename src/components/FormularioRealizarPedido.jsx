@@ -44,7 +44,7 @@ const enviarPedido = (e) => {
   });
 
   const costoTotal = cart.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
-  const costoEnvio = TipoServicio === "A domicilio" ? 300 : 0;
+  const costoEnvio = TipoServicio === "A domicilio" ? 400 : 0;
 
   const mensajeProductos = productosSeleccionados.join("\n");
   const mensajePedido = `¡Hola! Quisiera realizar el siguiente pedido,\n\nTipo de servicio: ${TipoServicio}\n\nNombre: ${nombre}\nDomicilio: ${domicilio}\n\n💲 Costos:\n\n${mensajeProductos}${TipoServicio === "A domicilio" ? `\nCosto de entrega: $${costoEnvio},00` : ""}\nTotal a pagar: $${costoTotal + costoEnvio},00\n\n👆 Envía este mensaje. Te atenderemos enseguida.`;
